@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Compañero de Camino — Kerygma Universal Films</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Nota: tipografía tomada del Plan Maestro v2.0, Cap. 11.2 (títulos en serif elegante,
+     textos en sans-serif limpia). Si esta página se abre sin conexión a internet, el
+     navegador usa automáticamente las alternativas locales indicadas en font-family. -->
+<style>
+  /* ================================================================
+     PALETA — dos niveles de identidad visual (ver punto 10 del brief)
+
+     NIVEL INSTITUCIONAL (Kerygma Universal Films): valores muestreados
+     directamente del logotipo oficial de KUF. Se usan SOLO en el
+     encabezado y elementos de identificación institucional.
+
+     NIVEL DEL CURSO (Fundamentos de Misión Digital): valores tomados del
+     Plan Maestro v2.0 — Diseño Instruccional del Ecosistema de Innovación
+     y Tecnología Educativa, Cap. 11.2 "Manual de identidad visual
+     actualizado" (mundo inmersivo FrameVR construido a partir de este
+     curso matriz). El documento describe los colores POR NOMBRE — morado
+     profundo, azul oscuro, dorado/ámbar, blanco, verde — sin códigos
+     hexadecimales exactos. Los valores hex de abajo son una interpretación
+     razonable de esos nombres para uso en pantalla, no códigos oficiales
+     certificados por una guía de marca con hex definidos. Se aplican al
+     área conversacional, el recorrido y la experiencia educativa, usando
+     el propio significado que el Plan Maestro asigna a cada color:
+       dorado/ámbar → misión y llamados a la acción (botones, paso activo)
+       verde        → esperanza y crecimiento (pasos completados)
+       morado       → profundidad y cultura digital (paneles, burbujas)
+       azul oscuro  → continuidad (burbuja del usuario)
+     ================================================================ */
+  :root{
+    /* Kerygma Universal Films — colores reales del logotipo (institucional) */
+    --kuf-teal-deep:#02595e;
+    --kuf-gold:#d79f30;
+    --kuf-gold-soft:#f1d69a;
+    --kuf-header-bg:#ffffff;      /* encabezado claro — igual que pagina-provisional.html */
+    --kuf-header-sub:#3c5f61;     /* subtítulo del encabezado, legible sobre fondo claro */
+
+    /* Curso — Fundamentos de Misión Digital (Plan Maestro v2.0, Cap. 11.2) */
+    --curso-purple-dark:#241a3a;   /* morado profundo, tono base */
+    --curso-purple:#3b2a5c;        /* morado profundo, tono de paneles/burbujas */
+    --curso-navy:#1b2740;          /* azul oscuro — burbuja del usuario */
+    --curso-gold:#c9962e;          /* dorado/ámbar — misión, llamados a la acción */
+    --curso-green:#4c8c6b;         /* verde — esperanza, crecimiento (completado) */
+    --curso-border:#55447a;        /* morado claro — bordes y separadores sutiles */
+    --text-light:#f5f1e6;          /* blanco cálido — texto sobre fondo oscuro */
+    --text-muted:#c9c2db;          /* texto secundario sobre fondo oscuro */
+    --text-on-gold:#241a3a;        /* texto oscuro legible sobre fondo dorado */
+
+    --radius:14px;
+    font-size:16px;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:'Montserrat',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--curso-purple-dark);
+    color:var(--text-light);
+    display:flex;
+    justify-content:center;
+  }
+  #app{
+    width:100%;
+    max-width:720px;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:var(--curso-purple-dark);
+    box-shadow:0 0 40px rgba(0,0,0,0.35);
+  }
+
+  /* ---------- HEADER (institucional — Kerygma Universal Films) ---------- */
+  header{
+    background:var(--kuf-header-bg);
+    color:var(--kuf-teal-deep);
+    padding:16px 20px 14px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    border-bottom:3px solid var(--kuf-teal-deep);
+  }
+  .brand-mark{
+    width:44px;height:44px;flex:0 0 44px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--kuf-gold-soft), var(--kuf-gold) 70%);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+    font-weight:700;color:var(--kuf-teal-deep);font-size:19px;
+    border:2px solid var(--kuf-header-bg);
+  }
+  .brand-text h1{
+    font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+    font-size:1.4rem;
+    font-weight:700;
+    margin:0;
+    line-height:1.15;
+    letter-spacing:.2px;
+  }
+  .brand-text p{
+    margin:2px 0 0;
+    font-size:.78rem;
+    color:var(--kuf-header-sub);
+    font-style:italic;
+  }
+  .kuf-tag{
+    margin-left:auto;
+    font-size:.68rem;
+    text-align:right;
+    color:var(--kuf-header-sub);
+    opacity:.85;
+    line-height:1.3;
+    max-width:110px;
+  }
+
+  /* ---------- PROGRESS PATH (Módulo 4) — identidad del curso ---------- */
+  #progress-path{
+    display:none;
+    background:var(--curso-purple);
+    padding:12px 16px 8px;
+    border-bottom:1px solid var(--curso-border);
+  }
+  #progress-path.active{display:block;}
+  .path-row{display:flex;align-items:flex-start;overflow-x:auto;gap:2px;padding-bottom:4px;}
+  .path-step{
+    flex:1 1 0;
+    min-width:64px;
+    text-align:center;
+    position:relative;
+  }
+  .path-step .dot{
+    width:20px;height:20px;border-radius:50%;
+    background:var(--text-light);
+    border:2px solid var(--curso-border);
+    margin:0 auto 4px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:.62rem;font-weight:700;color:var(--curso-purple-dark);
+    position:relative;z-index:1;
+  }
+  .path-step:not(:last-child)::after{
+    content:"";
+    position:absolute;
+    top:9px;left:calc(50% + 12px);
+    width:calc(100% - 12px);
+    height:2px;background:var(--curso-border);
+    z-index:0;
+  }
+  .path-step.done .dot{background:var(--curso-green);border-color:var(--curso-green);color:var(--text-light);}
+  .path-step.done:not(:last-child)::after{background:var(--curso-green);}
+  .path-step.current .dot{background:var(--curso-gold);border-color:var(--curso-gold);color:var(--text-on-gold);}
+  .path-step span.label{
+    font-size:.6rem;color:var(--text-muted);
+    display:block;line-height:1.15;
+  }
+
+  /* ---------- CHAT AREA ---------- */
+  #chat{
+    flex:1;
+    overflow-y:auto;
+    padding:18px 16px 6px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    background:
+      radial-gradient(var(--curso-border) 1px, transparent 1px);
+    background-size:22px 22px;
+    background-position:-4px -4px;
+  }
+  .msg{max-width:82%;padding:11px 14px;line-height:1.45;font-size:.95rem;}
+  .msg p{margin:0 0 8px;}
+  .msg p:last-child{margin-bottom:0;}
+  .msg.bot{
+    align-self:flex-start;
+    background:var(--curso-purple);
+    border:1px solid var(--curso-border);
+    border-radius:4px 16px 16px 16px;
+    color:var(--text-light);
+  }
+  .msg.user{
+    align-self:flex-end;
+    background:var(--curso-navy);
+    color:var(--text-light);
+    border-radius:16px 4px 16px 16px;
+  }
+  .msg.bot.system-note{
+    background:transparent;border:1px dashed var(--curso-border);
+    color:var(--text-muted);font-size:.78rem;align-self:center;max-width:92%;text-align:center;
+  }
+  .msg a{color:inherit;text-decoration:underline;font-weight:600;}
+  .msg.bot a{color:var(--curso-gold);}
+
+  .checklist{font-size:.85rem;margin-top:6px;padding-left:0;list-style:none;}
+  .checklist li{margin-bottom:2px;}
+  .checklist li.ok::before{content:"✓ ";color:var(--curso-green);font-weight:700;}
+  .checklist li.pending::before{content:"— ";color:var(--text-muted);}
+
+  /* ---------- QUICK REPLIES ---------- */
+  #quick-replies{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:4px 16px 12px;
+    background:var(--curso-purple-dark);
+  }
+  .chip{
+    border:1.5px solid var(--curso-gold);
+    color:var(--text-light);
+    background:transparent;
+    padding:8px 14px;
+    border-radius:20px;
+    font-size:.85rem;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  .chip:hover{background:var(--curso-gold);color:var(--text-on-gold);}
+  .chip.gold{background:var(--curso-gold);border-color:var(--curso-gold);color:var(--text-on-gold);font-weight:600;}
+  .chip.gold:hover{background:var(--curso-green);border-color:var(--curso-green);color:var(--text-light);}
+
+  /* ---------- INPUT ---------- */
+  #input-row{
+    display:flex;
+    gap:8px;
+    padding:12px 16px;
+    border-top:2px solid var(--curso-border);
+    background:var(--curso-purple-dark);
+  }
+  #text-input{
+    flex:1;
+    padding:11px 14px;
+    border-radius:22px;
+    border:1.5px solid var(--curso-border);
+    background:var(--curso-purple);
+    color:var(--text-light);
+    font-size:.95rem;
+    outline:none;
+    font-family:inherit;
+  }
+  #text-input::placeholder{color:var(--text-muted);}
+  #text-input:focus{border-color:var(--curso-gold);}
+  #send-btn{
+    background:var(--curso-gold);
+    color:var(--text-on-gold);
+    border:none;
+    border-radius:50%;
+    width:44px;height:44px;
+    font-size:1.1rem;
+    cursor:pointer;
+    flex:0 0 44px;
+  }
+  #send-btn:hover{background:var(--curso-green);color:var(--text-light);}
+
+  /* ---------- PRIVACY FOOTER ---------- */
+  #privacy-bar{
+    font-size:.7rem;
+    text-align:center;
+    color:var(--text-muted);
+    padding:6px 16px 10px;
+    background:var(--curso-purple-dark);
+  }
+  #privacy-bar button{
+    background:none;border:none;color:var(--curso-gold);
+    text-decoration:underline;cursor:pointer;font-size:.7rem;padding:0;
+  }
+  #privacy-detail{
+    display:none;
+    font-size:.72rem;
+    background:var(--curso-purple);
+    border-top:1px solid var(--curso-border);
+    padding:10px 16px;
+    color:var(--text-light);
+  }
+  #privacy-detail.open{display:block;}
+
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-thumb{background:var(--curso-border);border-radius:8px;}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header>
+    <div class="brand-mark">CC</div>
+    <div class="brand-text">
+      <h1>Compañero de Camino</h1>
+      <p>Asistente educativo de Kerygma Universal Films</p>
+    </div>
+    <div class="kuf-tag">Fundamentos de<br>Misión Digital</div>
+  </header>
+
+  <div id="progress-path">
+    <div class="path-row" id="path-row"></div>
+  </div>
+
+  <div id="chat" role="log" aria-live="polite"></div>
+
+  <div id="quick-replies"></div>
+
+  <div id="input-row">
+    <input id="text-input" type="text" placeholder="Escribe tu pregunta aquí..." aria-label="Escribe tu mensaje" />
+    <button id="send-btn" aria-label="Enviar">➤</button>
+  </div>
+
+  <div id="privacy-bar">
+    🔒 Compañero de Camino no solicita información personal.
+    <button id="privacy-toggle">Ver aviso de privacidad</button>
+  </div>
+  <div id="privacy-detail">
+    Este chatbot no pide ni almacena nombres completos, correos, teléfonos, contraseñas ni datos identificables.
+    Cuando converses sobre tu comunidad pastoral, describe grupos de forma general (por ejemplo: "jóvenes universitarios
+    de una pastoral parroquial"), no personas concretas. Las respuestas se generan localmente en tu navegador durante
+    esta sesión y no se envían a ningún servidor externo ni se guardan al cerrar la página.
+  </div>
+
+</div>
+
+<script>
+/* =========================================================================
+   COMPAÑERO DE CAMINO — motor conversacional (v2)
+   Basado en: storyboard de la página de Kerygma Universal Films,
+   exportación del curso "Fundamentos de Misión Digital: Fe, Liderazgo y
+   Cultura Digital" y la Plantilla de trabajo — Módulo 4.
+   Funciona por completo con lógica programada localmente en el
+   navegador (HTML + CSS + JavaScript). No hay conexión con un modelo de
+   IA generativa en tiempo real ni envío de datos a servidores externos.
+   No se solicita ni almacena información personal identificable.
+   ========================================================================= */
+
+/* ---------- 1. BASE DE CONOCIMIENTO: KERYGMA (Nivel 1) ---------- */
+const KERYGMA_QA = [
+  {
+    kws: ["que es kerygma","que es kuf","a que se dedica kerygma","a que se dedica","kerygma universal films"],
+    a: "Kerygma Universal Films es una iniciativa de comunicación, formación y evangelización digital que integra arte, producción audiovisual, educación, liderazgo y tecnología al servicio de la misión evangelizadora en el continente digital."
+  },
+  {
+    kws: ["proposito de kerygma","proposito","mision de kerygma","cual es su proposito"],
+    a: "Su propósito es formar, inspirar y acompañar a personas y comunidades para desarrollar proyectos, contenidos y experiencias capaces de comunicar la fe de manera significativa, creativa, contextualizada y profundamente humana."
+  },
+  {
+    kws: ["evangelizacion digital","relacion con la evangelizacion","que relacion tiene kerygma","relacion tiene con la evangelizacion"],
+    a: "Kerygma entiende la tecnología como una herramienta al servicio de las personas, la formación, el encuentro, la comunicación y la misión — nunca como un fin en sí misma. Por eso su trabajo está profundamente ligado a la evangelización en el continente digital."
+  },
+  {
+    kws: ["por que kerygma ofrece este curso","por que creo este curso","por que existe el curso","por que kerygma desarrolla este curso"],
+    a: "El curso nace de esa misma visión: integrar fe, comunicación, liderazgo, educación y tecnología al servicio de comunidades reales. Responde a una doble necesidad: muchos agentes pastorales aún no ven el entorno digital como un espacio legítimo de misión, y otros ya participan en él sin la formación crítica necesaria."
+  },
+  {
+    kws: ["arte comunicacion educacion liderazgo tecnologia","como integra arte","relacion entre arte y comunicacion","como se integran"],
+    a: "Para Kerygma, arte, comunicación, educación, liderazgo, tecnología y misión no son áreas separadas: se integran en cada proyecto. La producción audiovisual comunica, la comunicación forma, la formación despierta liderazgo, y la tecnología sostiene todo esto al servicio de la misión."
+  },
+  {
+    kws: ["como se relaciona el curso","relacion del curso con kerygma","curso y kerygma","propuesta educativa"],
+    a: "El curso forma parte del área de Formación de la página educativa de Kerygma. Desde ahí se accede, mediante un enlace, al espacio propio donde se desarrolla todo el recorrido formativo."
+  }
+];
+
+/* ---------- 2. ESTRUCTURA DEL CURSO (Nivel 2) ---------- */
+const MODULES = [
+  {
+    id: "intro",
+    label: "Introducción",
+    title: "Introducción al camino",
+    synth: "El curso ofrece una introducción integral a la misión digital desde una perspectiva pastoral y formativa. Parte de una doble brecha: la falta de comprensión del entorno digital como espacio legítimo de misión, y la necesidad de formación de quienes ya evangelizan en medios digitales.",
+    resource: null
+  },
+  {
+    id: "m1",
+    label: "Módulo 1",
+    title: "Módulo 1 — Identidad del Misionero Digital",
+    synth: "Explora la pregunta '¿quién soy en el mundo digital?'. La identidad digital no es solo un perfil: es la expresión de tus valores, creencias y comunidad en un espacio cada vez más cotidiano. No se puede construir misión digital auténtica sin antes comprender quién eres en ella.",
+    resource: {title:"San Carlo Acutis: vida y testimonio en el entorno digital", url:"https://www.youtube.com/watch?v=scBBoDqjpts"}
+  },
+  {
+    id: "m2",
+    label: "Módulo 2",
+    title: "Módulo 2 — Comprender el Contenido Digital",
+    synth: "Después de saber quién eres (Módulo 1), este paso te ayuda a comprender el territorio donde ejercerás tu misión: el continente digital tiene sus propios lenguajes, lógicas y dinámicas. No se puede misionar en un lugar que no se conoce.",
+    resource: {title:"Ejemplo de comunicación de fe en el entorno digital", url:"https://www.youtube.com/watch?v=9Xq7rVQq6K8"}
+  },
+  {
+    id: "m3",
+    label: "Módulo 3",
+    title: "Módulo 3 — Liderazgo Pastoral en Entornos Digitales",
+    synth: "Conocido el territorio y tu identidad en él, este es el espacio de discernimiento: reconocer las necesidades pastorales de tu comunidad y superar el 'síndrome del impostor', un obstáculo interno frecuente en quien inicia una misión digital.",
+    resource: null
+  },
+  {
+    id: "m4",
+    label: "Módulo 4",
+    title: "Módulo 4 — Diseño Inicial de Misión Digital",
+    synth: "El paso central del camino: con la identidad clara, el territorio conocido y el discernimiento hecho, aquí diseñas tu propuesta inicial de misión digital para una comunidad real. No busca un proyecto perfecto, sino un primer paso con sentido.",
+    resource: {title:"Evangelización digital — ejemplo de comunicación de fe", url:"https://youtu.be/L8bj5X72SqY"}
+  },
+  {
+    id: "cierre",
+    label: "Cierre",
+    title: "Cierre del camino",
+    synth: "El curso cierra integrando lo recorrido: una reflexión final del peregrino, un compromiso de misión y un encuentro sincrónico de celebración del camino compartido.",
+    resource: null
+  }
+];
+
+/* ---------- 3. RECURSOS COMPLEMENTARIOS (multimedia real, sin URL inventadas) ---------- */
+const RESOURCES = [
+  {title:"La Iglesia e Internet — Pontifical Council for Social Communications (2002)", url:"https://www.vatican.va/roman_curia/pontifical_councils/pccs/documents/rc_pc_pccs_doc_20020228_church-internet_sp.html", note:"documento oficial de la Iglesia sobre el uso pastoral de internet."},
+  {title:"Antiqua et Nova — Dicastery for the Doctrine of the Faith (2025)", url:"https://www.vatican.va/roman_curia/congregations/cfaith/documents/rc_dcf_doc_20250128_antiqua-et-nova_sp.html", note:"nota sobre inteligencia artificial e inteligencia humana."},
+  {title:"Cómo ser cristianos en las redes sociales — ACI Prensa (Villar, 2026)", url:"https://www.aciprensa.com/noticias/121083/como-ser-cristianos-en-las-redes-sociales-sacerdote-expone-desafios-y-ventajas-del-mundo-digital", note:"desafíos y ventajas del mundo digital para la fe."},
+  {title:"Cómo la tecnología está transformando la religión — National Geographic (Levy, 2025)", url:"https://www.nationalgeographicla.com/historia/2025/04/como-la-tecnologia-esta-transformando-la-religion", note:"panorama general de religión y tecnología."},
+  {title:"Digital religion and Generation Z — PubMed Central (Liu, 2025)", url:"https://pmc.ncbi.nlm.nih.gov/articles/PMC12528061/", note:"estudio sobre religión digital y la Generación Z."},
+  {title:"Storytelling — guía de Canva", url:"https://www.canva.com/learn/storytelling/", note:"para trabajar el tipo de contenido y el mensaje central (Pasos 4 y 5 del Módulo 4)."}
+];
+
+/* ---------- 4. MÓDULO 4 — pasos guiados (Mission Model Canvas adaptado) ---------- */
+const M4_STEPS = [
+  {
+    key:"comunidad", label:"Comunidad",
+    prompt:"Empecemos por conocer a quién quieres servir. Describe tu comunidad: ¿quiénes son, en qué contexto participan, qué intereses o hábitos digitales tienen? (Usa descripciones generales, no nombres de personas.)",
+    feedbackShort:"¿Podrías precisar más el contexto — por ejemplo, edad aproximada, tipo de comunidad (parroquial, universitaria, movimiento apostólico) o hábitos digitales concretos?",
+    gap:"Todavía podemos precisar mejor el contexto o los hábitos digitales de esa comunidad."
+  },
+  {
+    key:"necesidad", label:"Necesidad",
+    prompt:"Ahora pensemos en la necesidad pastoral. ¿Qué has observado en esta comunidad? ¿A quién afecta y qué evidencia o experiencia te hace reconocer esa necesidad?",
+    feedbackShort:"¿Qué observaste concretamente que te hace pensar que esta necesidad existe?",
+    gap:"Todavía necesitamos identificar con más evidencia qué necesidad pastoral específica estás observando."
+  },
+  {
+    key:"proposito", label:"Propósito",
+    prompt:"¿Qué transformación deseas generar en esta comunidad? ¿Qué cambio esperas provocar en su forma de pensar, actuar o vivir la fe?",
+    feedbackShort:"¿Qué se vería distinto en esta comunidad si tu misión digital funciona?",
+    gap:"Todavía podemos precisar qué cambio específico esperas lograr."
+  },
+  {
+    key:"mensaje", label:"Mensaje",
+    prompt:"¿Cuál sería el mensaje clave que comunicarás? ¿Qué valor aporta tu propuesta y por qué sería relevante para esta comunidad?",
+    feedbackShort:"¿Podrías resumir tu mensaje en una sola frase que la comunidad pudiera recordar fácilmente?",
+    gap:"Todavía podemos afinar cuál sería el mensaje central en una sola idea clara."
+  },
+  {
+    key:"contenido", label:"Contenido",
+    prompt:"¿Qué tipo de contenido usarás (video, reflexión, testimonio, carrusel, audio, etc.) y por qué responde a la necesidad identificada? No hay una respuesta 'correcta' — elige la que tenga más sentido para tu comunidad y justifícala.",
+    feedbackShort:"¿Por qué ese formato en particular conecta mejor con esta comunidad que otros?",
+    gap:"Todavía falta justificar por qué ese formato responde mejor a la necesidad identificada."
+  },
+  {
+    key:"plataforma", label:"Plataforma",
+    prompt:"Antes de elegir una plataforma, pensemos: ¿dónde está tu comunidad?, ¿cómo se comunica?, ¿qué hábitos digitales tiene? A partir de eso, ¿qué plataforma sería coherente?",
+    feedbackShort:"¿Qué evidencia tienes de que tu comunidad realmente usa o prefiere esa plataforma?",
+    gap:"Todavía falta confirmar con qué evidencia sabes que tu comunidad usa esa plataforma."
+  },
+  {
+    key:"propuesta", label:"Propuesta",
+    prompt:"Ahora integremos todo: comunidad + necesidad + propósito + mensaje + contenido + plataforma. Describe, paso a paso, cómo se implementaría tu propuesta concreta de misión digital.",
+    feedbackShort:"¿Podrías describir con más detalle cómo se vería el primer paso concreto de esta implementación?",
+    gap:"Todavía podemos detallar más los pasos concretos de implementación."
+  },
+  {
+    key:"impacto", label:"Impacto",
+    prompt:"Por último: ¿qué cambio concreto esperas generar? ¿Cómo sabrías que tu propuesta está funcionando y cumpliendo su propósito?",
+    feedbackShort:"¿Qué señal observable te permitiría reconocer que ese impacto realmente está ocurriendo?",
+    gap:"Todavía falta definir una señal observable que te permita reconocer ese impacto."
+  }
+];
+
+/* Señales simples (sin acentos, se comparan contra texto normalizado) que indican
+   que una respuesta ya trae un elemento concreto para ese paso. Reglas simples,
+   no interpretación semántica profunda. */
+const STEP_SIGNALS = {
+  comunidad: ["anos","edad","universitari","parroqui","catequesis","joven","grupo","comunidad","liceo","colegio","movimiento","pastoral","adolescent","adult"],
+  necesidad: ["porque","observado","he visto","afecta","evidencia","note","dificultad","falta de","carecen","he notado","preocupa"],
+  proposito: ["cambio","transformacion","logren","esperando que","puedan","fortalecer","despertar","que descubran","que comprendan"],
+  mensaje: ["mensaje","valor","comunicar","transmitir","frase","invitacion","recordar"],
+  contenido: ["video","reflexion","testimonio","carrusel","audio","podcast","imagen","publicacion","infografia","serie"],
+  plataforma: ["instagram","tiktok","youtube","facebook","whatsapp","padlet","plataforma","red social"],
+  propuesta: ["primero","luego","despues","paso","semana","implementar","plan","empezaria","comenzaria"],
+  impacto: ["indicador","medir","sabre","senal","participacion","comentarios","respuesta","mensajes recibidos","asistencia"]
+};
+
+/* ---------- 5. CONCEPTOS (educación diferenciada real) ---------- */
+const CONCEPT_QA = [
+  {
+    kws:["cultura digital"], module:"m2",
+    brief:"La cultura digital son los lenguajes, lógicas y dinámicas propias del entorno digital: cómo se comunica, se comparte y se construyen comunidades en línea.",
+    deep:"La cultura digital abarca los lenguajes, lógicas y dinámicas del entorno digital: cómo se comunica, se comparte contenido y se construyen comunidades en línea. Comprenderla es el eje del Módulo 2 — no se puede ejercer una misión pastoral en un territorio que no se conoce. Pastoralmente implica leer ese entorno con mirada crítica antes de actuar en él, reconociendo tanto sus oportunidades (alcance, cercanía, inmediatez) como sus riesgos (superficialidad, polarización, dependencia del algoritmo).",
+    example:"Por ejemplo: una pastoral juvenil nota que sus publicaciones formales generan poca interacción, pero un testimonio breve en video sí conecta. Eso es leer la cultura digital de esa comunidad concreta antes de decidir cómo comunicar la fe ahí."
+  },
+  {
+    kws:["identidad digital"], module:"m1",
+    brief:"La identidad digital no es solo un perfil o una foto: es la expresión de tus valores, creencias y comunidad en un espacio que forma parte cada vez más de la vida cotidiana.",
+    deep:"La identidad digital es el punto de partida del Módulo 1: antes de construir cualquier misión digital, hace falta comprender y asumir conscientemente quién eres cuando estás en línea. No se trata solo de lo que publicas, sino de lo que comunicas con tu vida — cómo esa presencia refleja (o no) tus valores y tu fe.",
+    example:"Por ejemplo: el recurso del Módulo 1 sobre San Carlo Acutis muestra cómo alguien usó su presencia digital con coherencia entre identidad, vida y fe — un ejemplo concreto de identidad digital vivida con sentido."
+  },
+  {
+    kws:["liderazgo pastoral","liderazgo digital"], module:"m3",
+    brief:"El liderazgo pastoral en entornos digitales implica discernir las necesidades reales de una comunidad y superar obstáculos internos, como el 'síndrome del impostor'.",
+    deep:"En el Módulo 3, el liderazgo pastoral digital se entiende como un espacio de discernimiento: reconocer las necesidades de tu comunidad y, al mismo tiempo, superar un obstáculo frecuente — la sensación de no estar suficientemente preparado o capacitado para ejercer misión en lo digital. Ese discernimiento es la antesala directa del diseño de una propuesta concreta (Módulo 4).",
+    example:"Por ejemplo: un catequista siente que 'no domina la tecnología' y por eso evita usar redes sociales para su ministerio — reconocer ese síndrome del impostor es el primer paso para ejercer liderazgo digital con más libertad."
+  },
+  {
+    kws:["mision digital"], module:"m4",
+    brief:"Una misión digital es una iniciativa concreta — basada en una comunidad real y una necesidad pastoral identificada — que usa medios digitales para comunicar la fe de manera significativa.",
+    deep:"La misión digital se diseña paso a paso en el Módulo 4, integrando ocho elementos: comunidad, necesidad, propósito, mensaje, contenido, plataforma, propuesta concreta e impacto esperado. No es un proyecto perfecto desde el inicio, sino un primer paso con sentido pastoral, construido a partir del discernimiento trabajado en los módulos anteriores.",
+    example:"Por ejemplo: identificar que jóvenes universitarios de una pastoral se sienten solos en época de exámenes, y proponer una serie breve de videos de acompañamiento espiritual compartidos en Instagram durante esas semanas."
+  },
+  {
+    kws:["mission model canvas"], module:"m4",
+    brief:"El Mission Model Canvas es un modelo para estructurar propuestas de impacto de forma organizada y aplicable.",
+    deep:"La plantilla del Módulo 4 está inspirada en el Mission Model Canvas, adaptándolo a la misión digital: en vez de un modelo de negocio, organiza comunidad, necesidad, propósito, mensaje, contenido, plataforma, propuesta e impacto en un solo mapa coherente que se construye progresivamente.",
+    example:"Por ejemplo: en vez de llenar las nueve casillas típicas de un Business Model Canvas, en el Módulo 4 llenas los ocho elementos pastorales adaptados — comunidad, necesidad, propósito, etc. — paso a paso con acompañamiento."
+  },
+  {
+    kws:["misionero digital"], module:null,
+    brief:"Ser misionero digital significa vivir y comunicar la fe con coherencia en el entorno digital, no solo estar presente en redes.",
+    deep:"Ser misionero digital implica recorrer tres pasos antes de actuar: tener identidad clara (Módulo 1), comprender el territorio digital (Módulo 2) y ejercer discernimiento pastoral (Módulo 3) — recién entonces se diseña una propuesta concreta (Módulo 4). No es una técnica de manejo de redes sociales, sino una forma de vivir la misión evangelizadora en un espacio nuevo.",
+    example:"Por ejemplo: San Carlo Acutis es citado en el Módulo 1 como un caso de coherencia entre identidad, vida y presencia digital — un ejemplo concreto de lo que significa ser misionero digital."
+  }
+];
+
+/* ---------- 6. REFLEXIÓN (temas y preguntas de profundización) ---------- */
+const REFLECT_PROMPTS = [
+  "¿Quién eres cuando estás en línea? ¿Tu presencia digital refleja lo que crees y cómo vives tu fe?",
+  "¿Qué necesidad pastoral has observado en tu comunidad, dentro o fuera de lo digital?",
+  "¿Qué te detiene con más frecuencia para ejercer liderazgo en entornos digitales: la falta de formación técnica, el miedo a no estar preparado, u otra cosa?"
+];
+const REFLECT_THEMES = [
+  {kws:["identidad","quien soy","perfil digital","presencia digital"], moduleId:"m1", label:"tu identidad digital", followup:"¿Qué parte de esa identidad digital sientes que refleja mejor tu fe?"},
+  {kws:["cultura digital","redes","algoritmo","continente digital"], moduleId:"m2", label:"la cultura digital", followup:"¿Cómo crees que esa dinámica digital que mencionas afecta la manera en que tu comunidad vive la fe?"},
+  {kws:["liderazgo","lider","impostor","preparad"], moduleId:"m3", label:"el liderazgo pastoral", followup:"¿Qué necesitarías para sentirte con más confianza al ejercer ese liderazgo?"},
+  {kws:["discernimiento","discernir","necesidad","comunidad"], moduleId:"m3", label:"el discernimiento de necesidades", followup:"¿Qué señal concreta te ayudó a reconocer esa necesidad?"},
+  {kws:["mision","propuesta","impacto"], moduleId:"m4", label:"tu misión digital", followup:"¿Qué primer paso pequeño podrías dar hacia esa misión?"}
+];
+
+/* ---------- 7. AUTOEVALUACIÓN — contextual por módulo ---------- */
+const CHECK_QUESTIONS_BY_MODULE = {
+  m1: [
+    {q:"¿Cuál es la pregunta central del Módulo 1?", opts:["¿Quién soy en el mundo digital?","¿Qué plataforma debo usar?","¿Cuánto cuesta un anuncio digital?"], correct:0, note:"El Módulo 1 parte de comprender tu identidad digital antes de construir cualquier misión."},
+    {q:"Según el módulo, la identidad digital es...", opts:["Solo un perfil o una foto","La expresión de tus valores, creencias y comunidad en lo digital","Un dato que no importa para la misión"], correct:1, note:"No se trata solo de lo que publicas, sino de lo que comunicas con tu vida."}
+  ],
+  m2: [
+    {q:"El Módulo 2 te ayuda principalmente a...", opts:["Diseñar tu propuesta final","Comprender el continente digital y sus dinámicas","Evaluar el curso"], correct:1, note:"Conocer el 'territorio' digital es el paso previo al discernimiento del liderazgo pastoral."},
+    {q:"¿Por qué es necesario comprender el continente digital antes de actuar en él?", opts:["Porque tiene sus propios lenguajes, lógicas y dinámicas","Porque así consigues más seguidores","Porque lo exige la plataforma"], correct:0, note:"No se puede misionar en un territorio que no se conoce."}
+  ],
+  m3: [
+    {q:"¿Qué obstáculo interno se trabaja en el Módulo 3?", opts:["El síndrome del impostor","La falta de internet","El exceso de seguidores"], correct:0, note:"Reconocerlo es clave para no dejar que ese obstáculo interno detenga tu misión."},
+    {q:"El Módulo 3 es principalmente un espacio de...", opts:["Discernimiento de necesidades pastorales","Edición de video","Contabilidad del proyecto"], correct:0, note:"Es la antesala directa del diseño de la propuesta en el Módulo 4."}
+  ],
+  m4: [
+    {q:"El producto final del Módulo 4 está inspirado en...", opts:["Un plan de negocios tradicional","El Mission Model Canvas adaptado a la misión digital","Un currículum vitae"], correct:1, note:"La plantilla sigue la lógica de comunidad, necesidad, propósito, mensaje, contenido, plataforma, propuesta e impacto."},
+    {q:"En el Módulo 4, Compañero de Camino debe...", opts:["Construir la propuesta completa por el estudiante","Acompañar con preguntas sin sustituir el proceso del estudiante","Elegir la plataforma automáticamente"], correct:1, note:"El acompañamiento es mediante preguntas guiadas, nunca sustituyendo el discernimiento del estudiante."}
+  ]
+};
+CHECK_QUESTIONS_BY_MODULE.general = [
+  CHECK_QUESTIONS_BY_MODULE.m1[0],
+  CHECK_QUESTIONS_BY_MODULE.m2[0],
+  CHECK_QUESTIONS_BY_MODULE.m3[0],
+  CHECK_QUESTIONS_BY_MODULE.m4[0]
+];
+
+/* ---------- ESTADO ---------- */
+let state = {
+  mode: "menu",        // menu | kerygma | course | m4 | m4edit | m4review | concept | reflect | check
+  m4Index: 0,
+  m4Answers: {},
+  m4Started: false,
+  m4EditingKey: null,
+  courseSelected: null,
+  checkModule: "general",
+  checkIndex: 0,
+  checkScore: 0,
+  conceptLevel: null
+};
+
+/* ---------- UTILIDADES DE INTERFAZ ---------- */
+const chatEl = document.getElementById("chat");
+const quickEl = document.getElementById("quick-replies");
+const progressEl = document.getElementById("progress-path");
+const pathRow = document.getElementById("path-row");
+
+function normalize(s){
+  return s.toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[¿?¡!.,]/g,"")
+    .trim();
+}
+
+/* Coincidencia por conjunto de palabras (más robusta que una subcadena exacta):
+   todas las palabras de la frase clave deben aparecer en el texto, en cualquier
+   orden, permitiendo que el usuario escriba de forma natural. */
+function containsAllWords(norm, phrase){
+  const words = phrase.split(" ").filter(Boolean);
+  return words.every(w => new RegExp("\\b" + w + "\\b").test(norm));
+}
+
+function excerpt(text, n){
+  n = n || 14;
+  const words = text.trim().split(/\s+/);
+  return words.length <= n ? text.trim() : words.slice(0,n).join(" ") + "…";
+}
+
+function addMsg(text, who, opts){
+  opts = opts || {};
+  const div = document.createElement("div");
+  div.className = "msg " + who + (opts.system ? " system-note" : "");
+  const paras = text.split("\n\n");
+  paras.forEach(p=>{
+    const pEl = document.createElement("p");
+    pEl.innerHTML = p;
+    div.appendChild(pEl);
+  });
+  chatEl.appendChild(div);
+  chatEl.scrollTop = chatEl.scrollHeight;
+}
+
+function botSay(text, opts){ addMsg(text, "bot", opts); }
+function userSay(text){ addMsg(escapeHtml(text), "user"); }
+
+function escapeHtml(str){
+  const d = document.createElement("div");
+  d.innerText = str;
+  return d.innerHTML;
+}
+
+function setQuickReplies(options){
+  quickEl.innerHTML = "";
+  options.forEach(opt=>{
+    const btn = document.createElement("button");
+    btn.className = "chip" + (opt.gold ? " gold" : "");
+    btn.textContent = opt.label;
+    btn.onclick = () => { userSay(opt.label); opt.action(); };
+    quickEl.appendChild(btn);
+  });
+}
+
+function renderPath(){
+  if(state.mode !== "m4"){ progressEl.classList.remove("active"); return; }
+  progressEl.classList.add("active");
+  pathRow.innerHTML = "";
+  M4_STEPS.forEach((s,i)=>{
+    const step = document.createElement("div");
+    step.className = "path-step" + (i < state.m4Index ? " done" : "") + (i === state.m4Index ? " current" : "");
+    step.innerHTML = `<div class="dot">${i+1}</div><span class="label">${s.label}</span>`;
+    pathRow.appendChild(step);
+  });
+}
+
+/* ---------- MENÚ PRINCIPAL ---------- */
+function goMenu(){
+  state.mode = "menu";
+  renderPath();
+  const m4Label = Object.keys(state.m4Answers).length > 0
+    ? "Continuar mi propuesta de misión digital"
+    : "Construir mi propuesta de misión digital";
+  setQuickReplies([
+    {label:"Conocer Kerygma", action: goKerygma},
+    {label:"Explorar el curso", action: goCourse},
+    {label:"Comprender un tema", action: goConcept},
+    {label:"Reflexionar sobre mi camino", action: goReflect},
+    {label:"Comprobar lo aprendido", action: goCheckMenu},
+    {label:m4Label, action: goM4, gold:true}
+  ]);
+}
+
+function welcome(){
+  botSay(
+    "¡Bienvenido/a!<br>Soy <strong>Compañero de Camino</strong>, el asistente educativo de Kerygma Universal Films.\n\n" +
+    "Estoy aquí para acompañarte durante tu recorrido por <em>Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital</em>.\n\n" +
+    "Puedes conocer más sobre Kerygma, explorar los contenidos del curso, aclarar conceptos, reflexionar sobre tu experiencia y, especialmente, recibir acompañamiento paso a paso para diseñar tu propuesta de misión digital.\n\n" +
+    "¿En qué parte del camino deseas comenzar?"
+  );
+  goMenu();
+}
+
+/* ---------- NIVEL 1: CONOCER KERYGMA ---------- */
+function goKerygma(){
+  state.mode = "kerygma";
+  renderPath();
+  botSay("Puedes preguntarme, por ejemplo: <em>“¿Qué es Kerygma Universal Films?”</em>, <em>“¿Cuál es su propósito?”</em>, <em>“¿A qué se dedica?”</em> o <em>“¿Por qué creó este curso?”</em>. También puedes escribir tu propia pregunta abajo.");
+  setQuickReplies([
+    {label:"¿Qué es Kerygma Universal Films?", action:()=>answerKerygmaByKey("que es kerygma")},
+    {label:"¿Cuál es su propósito?", action:()=>answerKerygmaByKey("proposito de kerygma")},
+    {label:"¿Cómo integra arte, comunicación y tecnología?", action:()=>answerKerygmaByKey("como integra arte")},
+    {label:"¿Por qué creó este curso?", action:()=>answerKerygmaByKey("por que kerygma ofrece este curso")},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+function answerKerygmaByKey(matchKey){
+  const item = KERYGMA_QA.find(q => q.kws.includes(matchKey));
+  if(item){
+    botSay(item.a);
+    botSay("¿Quieres conocer el recorrido formativo del curso?");
+    setQuickReplies([
+      {label:"Sí, quiero conocer el curso", action: goCourse},
+      {label:"Otra pregunta sobre Kerygma", action: goKerygma},
+      {label:"⬅ Volver al menú", action: goMenu}
+    ]);
+  } else {
+    fallbackLimite();
+  }
+}
+
+/* ---------- NIVEL 2: EXPLORAR EL CURSO ---------- */
+function goCourse(){
+  state.mode = "course";
+  renderPath();
+  botSay("El curso se organiza como un camino de cuatro pasos, además de una introducción y un cierre. ¿Qué etapa quieres explorar?");
+  const opts = MODULES.map(m => ({label:m.label, action: ()=>showModule(m.id)}));
+  opts.push({label:"⬅ Volver al menú", action: goMenu});
+  setQuickReplies(opts);
+}
+function showModule(id){
+  const m = MODULES.find(x=>x.id===id);
+  state.courseSelected = id;
+  botSay(`<strong>${m.title}</strong>\n\n${m.synth}`);
+  if(m.resource){
+    botSay(`📎 Recurso relacionado: <a href="${m.resource.url}" target="_blank" rel="noopener">${m.resource.title}</a>`);
+  }
+  const opts = [{label:"Ver otro módulo", action: goCourse}];
+  if(CHECK_QUESTIONS_BY_MODULE[id]){
+    opts.push({label:"Comprobar lo aprendido de este módulo", action: ()=>goCheck(id)});
+  }
+  opts.push({label:"⬅ Volver al menú", action: goMenu});
+  setQuickReplies(opts);
+}
+
+/* ---------- COMPRENDER UN TEMA (educación diferenciada real) ---------- */
+function goConcept(){
+  state.mode = "concept";
+  state.conceptLevel = null;
+  renderPath();
+  botSay("Cuéntame qué concepto quieres comprender. Por ejemplo: <em>“cultura digital”</em>, <em>“identidad digital”</em> o <em>“misionero digital”</em>. También puedes elegir primero el tipo de explicación que prefieres:");
+  setQuickReplies([
+    {label:"Explícamelo brevemente", action:()=>{ state.conceptLevel='brief'; botSay("Perfecto — dime el concepto y te lo explico en pocas líneas."); }},
+    {label:"Quiero profundizar", action:()=>{ state.conceptLevel='deep'; botSay("Con gusto — dime el concepto y te doy una explicación más completa, conectada con el módulo correspondiente."); }},
+    {label:"Dame un ejemplo", action:()=>{ state.conceptLevel='example'; botSay("Claro — dime el concepto y te doy un ejemplo concreto en un contexto pastoral."); }},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+function answerConcept(item){
+  const level = state.conceptLevel || "brief";
+  const text = item[level] || item.brief;
+  botSay(text);
+  if(level === "deep" && item.module){
+    const m = MODULES.find(x=>x.id===item.module);
+    if(m) botSay(`Esto se trabaja específicamente en <strong>${m.title}</strong>.`);
+  }
+  setQuickReplies([
+    {label:"Explícamelo más sencillo", action:()=>{ state.conceptLevel='brief'; answerConcept(item); }},
+    {label:"Quiero profundizar", action:()=>{ state.conceptLevel='deep'; answerConcept(item); }},
+    {label:"Dame un ejemplo", action:()=>{ state.conceptLevel='example'; answerConcept(item); }},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+
+/* ---------- REFLEXIONAR SOBRE MI CAMINO ---------- */
+function goReflect(){
+  state.mode = "reflect";
+  renderPath();
+  const p = REFLECT_PROMPTS[Math.floor(Math.random()*REFLECT_PROMPTS.length)];
+  botSay(`Tómate un momento para este paso del camino.\n\n${p}\n\nPuedes escribir lo que surja — no hay respuestas correctas, esto es solo para ti.`);
+  setQuickReplies([
+    {label:"Otra pregunta de reflexión", action: goReflect},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+function handleReflectAnswer(text){
+  const norm = normalize(text);
+  const theme = REFLECT_THEMES.find(t => t.kws.some(k => containsAllWords(norm, k)));
+  let msg;
+  if(theme){
+    msg = `Gracias por compartir esto. Lo que describes se relaciona con ${theme.label}.\n\n${theme.followup}`;
+  } else {
+    msg = `Gracias por compartir esto — detenerte a pensarlo ya es un paso importante del camino.\n\n¿Qué fue lo que más te hizo detenerte a pensar sobre esto?`;
+  }
+  botSay(msg);
+  setQuickReplies([
+    {label:"Profundizar en mi reflexión", action:()=>{ botSay("Cuéntame un poco más — ¿qué más se te ocurre al pensarlo?"); }},
+    {label:"Otra pregunta de reflexión", action: goReflect},
+    {label:"Relacionarlo con un módulo", action: ()=>{
+        if(theme){ showModule(theme.moduleId); } else { goCourse(); }
+      }},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+
+/* ---------- COMPROBAR LO APRENDIDO (contextual por módulo) ---------- */
+function goCheckMenu(){
+  state.mode = "check";
+  renderPath();
+  botSay("¿Sobre qué parte del camino quieres comprobar lo aprendido?");
+  setQuickReplies([
+    {label:"Módulo 1", action:()=>goCheck("m1")},
+    {label:"Módulo 2", action:()=>goCheck("m2")},
+    {label:"Módulo 3", action:()=>goCheck("m3")},
+    {label:"Módulo 4", action:()=>goCheck("m4")},
+    {label:"Repaso general del curso", action:()=>goCheck("general")},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+function goCheck(moduleId){
+  state.mode = "check";
+  state.checkModule = moduleId || "general";
+  state.checkIndex = 0;
+  state.checkScore = 0;
+  renderPath();
+  askCheck();
+}
+function askCheck(){
+  const list = CHECK_QUESTIONS_BY_MODULE[state.checkModule] || CHECK_QUESTIONS_BY_MODULE.general;
+  if(state.checkIndex >= list.length){
+    botSay(`Completaste la autoevaluación: ${state.checkScore} de ${list.length} correctas. Esto es solo para repasar — no forma parte de tu calificación oficial en el curso.`);
+    setQuickReplies([
+      {label:"Repasar de nuevo", action: ()=>goCheck(state.checkModule)},
+      {label:"Elegir otro módulo", action: goCheckMenu},
+      {label:"⬅ Volver al menú", action: goMenu}
+    ]);
+    return;
+  }
+  const item = list[state.checkIndex];
+  botSay(item.q);
+  const opts = item.opts.map((op,i)=>({
+    label: op,
+    action: ()=>{
+      if(i === item.correct){
+        state.checkScore++;
+        botSay("✓ Correcto. " + item.note);
+      } else {
+        botSay("No es esa. " + item.note);
+      }
+      state.checkIndex++;
+      askCheck();
+    }
+  }));
+  setQuickReplies(opts);
+}
+
+/* ---------- NIVEL 3: MÓDULO 4 — CONSTRUIR MI PROPUESTA ---------- */
+function goM4(){
+  state.mode = "m4";
+  const hasAny = Object.keys(state.m4Answers).length > 0;
+  let resumeIndex = M4_STEPS.findIndex(s => !state.m4Answers[s.key]);
+  state.m4Index = resumeIndex === -1 ? M4_STEPS.length : resumeIndex;
+  renderPath();
+  if(!hasAny){
+    botSay(
+      "Este es uno de los momentos más importantes del camino. Vamos a construir tu propuesta paso a paso. " +
+      "Yo puedo ayudarte a pensar, hacer preguntas, ofrecer ejemplos y darte retroalimentación, pero las decisiones deben " +
+      "surgir de tu experiencia, tu discernimiento y el conocimiento de la comunidad a la que deseas servir.\n\n" +
+      "Recuerda: no compartas nombres ni datos identificables de personas concretas — describe a tu comunidad de forma general."
+    );
+  } else if(state.m4Index < M4_STEPS.length){
+    botSay("Continuemos donde dejamos el camino.");
+  }
+  state.m4Started = true;
+  askM4Step();
+}
+function askM4Step(){
+  renderPath();
+  if(state.m4Index >= M4_STEPS.length){
+    showM4Summary(true);
+    return;
+  }
+  const step = M4_STEPS[state.m4Index];
+  botSay(step.prompt);
+  setQuickReplies([
+    {label:"Ver mi resumen hasta ahora", action: ()=>showM4Summary(false)},
+    {label:"⬅ Paso anterior", action: goM4Back},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+function goM4Back(){
+  if(state.m4Index > 0){ state.m4Index--; }
+  askM4Step();
+}
+
+/* --- evaluación pedagógica con reglas simples --- */
+function evaluateM4Answer(step, text){
+  const norm = normalize(text);
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  const tooShort = words.length < 6;
+  const broad = /\btodos\b|\btodo el mundo\b|\bcualquiera\b|\ben general\b/.test(norm);
+  const signals = STEP_SIGNALS[step.key] || [];
+  const matchedSignals = signals.filter(s => norm.includes(s));
+  const clear = !tooShort && !broad && matchedSignals.length > 0;
+  return {clear, tooShort, broad, matchedSignals};
+}
+function buildM4Feedback(step, text){
+  const ack = `Reconozco algo concreto en lo que compartiste: "${excerpt(text)}".`;
+  return `${ack} ${step.gap}\n\n${step.feedbackShort}`;
+}
+function handleM4Answer(text){
+  const step = M4_STEPS[state.m4Index];
+  state.m4Answers[step.key] = text;
+  const evalResult = evaluateM4Answer(step, text);
+  if(evalResult.clear){
+    botSay(`Muy bien — ya defines: "${excerpt(text)}". Sigamos con el próximo paso del camino.`);
+    state.m4Index++;
+    showProgressNote();
+    askM4Step();
+  } else {
+    botSay(buildM4Feedback(step, text));
+    setQuickReplies([
+      {label:"Precisar mi respuesta", action:()=>{
+        botSay("Adelante — cuéntame con más detalle o precisa lo que mencionaste. Puedes escribir tu respuesta ampliada abajo.");
+      }},
+      {label:"Continuar de todas formas", action:()=>{ state.m4Index++; showProgressNote(); askM4Step(); }},
+      {label:"⬅ Volver al menú", action: goMenu}
+    ]);
+  }
+}
+function showProgressNote(){
+  if(state.m4Index === 0 || state.m4Index >= M4_STEPS.length) return;
+  if(state.m4Index % 3 === 0){ showM4Summary(false); }
+}
+function showM4Summary(final){
+  let html = (final ? "Has completado el recorrido del Módulo 4. " : "Hasta ahora hemos construido:") + "\n\n<ul class='checklist'>";
+  M4_STEPS.forEach(s=>{
+    const has = !!state.m4Answers[s.key];
+    html += `<li class="${has?'ok':'pending'}">${s.label}${has ? '' : ' (pendiente)'}</li>`;
+  });
+  html += "</ul>";
+  botSay(html);
+
+  if(!final){
+    setQuickReplies([
+      {label:"Continuar con el siguiente paso", action: askM4Step},
+      {label:"⬅ Volver al menú", action: goMenu}
+    ]);
+    return;
+  }
+
+  // Resumen legible con las respuestas propias del estudiante (no reformuladas)
+  let mapHtml = "Este es el mapa que has construido durante tu camino:\n\n<ul class='checklist'>";
+  M4_STEPS.forEach(s=>{
+    const val = state.m4Answers[s.key];
+    mapHtml += `<li class="${val?'ok':'pending'}"><strong>${s.label}:</strong> ${val ? escapeHtml(val) : '(pendiente)'}</li>`;
+  });
+  mapHtml += "</ul>";
+  botSay(mapHtml);
+  botSay("Este es un primer paso — no tiene que ser perfecto. Puedes revisar y ajustar cualquier parte cuando quieras.");
+  setQuickReplies([
+    {label:"Revisar un paso", action: goM4Review},
+    {label:"Seguir reflexionando", action: goReflect},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+
+/* --- revisión/edición de cualquiera de los ocho pasos, sin empezar de cero --- */
+function goM4Review(){
+  state.mode = "m4review";
+  renderPath();
+  botSay("Selecciona el elemento de tu propuesta que quieras revisar o editar:");
+  const opts = M4_STEPS.map(s => ({
+    label: `${s.label}${state.m4Answers[s.key] ? " ✓" : " (vacío)"}`,
+    action: ()=> reviewM4Item(s.key)
+  }));
+  opts.push({label:"⬅ Volver al menú", action: goMenu});
+  setQuickReplies(opts);
+}
+function reviewM4Item(key){
+  const step = M4_STEPS.find(s=>s.key===key);
+  const current = state.m4Answers[key];
+  state.m4EditingKey = key;
+  botSay(`<strong>${step.label}</strong>\n\nRespuesta actual: “${current ? escapeHtml(current) : '(sin respuesta todavía)'}”`);
+  setQuickReplies([
+    {label:"Editar esta respuesta", action: ()=>{ state.mode = "m4edit"; botSay(step.prompt); }},
+    {label:"Mantenerla y volver al mapa", action: goM4Review},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+function handleM4EditAnswer(text){
+  const step = M4_STEPS.find(s=>s.key===state.m4EditingKey);
+  state.m4Answers[step.key] = text;
+  const evalResult = evaluateM4Answer(step, text);
+  if(evalResult.clear){
+    botSay(`Actualizado. Ya defines: "${excerpt(text)}".`);
+  } else {
+    botSay(buildM4Feedback(step, text));
+  }
+  setQuickReplies([
+    {label:"Guardar y volver al mapa", action: goM4Review},
+    {label:"Seguir editando esta respuesta", action: ()=>{ botSay("Adelante, escribe la versión ajustada."); }},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+
+/* ---------- LÍMITES DE CONOCIMIENTO ---------- */
+function fallbackLimite(){
+  botSay("Ese tema no está desarrollado directamente en los materiales de este curso. Puedo ayudarte a relacionarlo con los conceptos de misión digital que sí estamos trabajando, o puedes explorar el menú principal.");
+  setQuickReplies([
+    {label:"Ver menú principal", action: goMenu}
+  ]);
+}
+
+/* ---------- DETECCIÓN: solicitud de hacer el trabajo por el estudiante ---------- */
+const DO_IT_FOR_ME = [
+  "hazme una propuesta","hazme completa","hazla completa","completa la propuesta",
+  "hazlo por mi","hazlo tu","escribela tu","dame la propuesta terminada","hazme el trabajo","hazme completo"
+];
+function isAskingToDoItForThem(norm){
+  return DO_IT_FOR_ME.some(p => norm.includes(p));
+}
+
+/* ---------- ENRUTADOR DE MENSAJES LIBRES ---------- */
+function routeFreeText(raw){
+  const norm = normalize(raw);
+
+  if(isAskingToDoItForThem(norm)){
+    botSay("Podemos construirla juntos. Para que la propuesta responda realmente a una comunidad concreta, comencemos por conocerla mejor.");
+    goM4();
+    return;
+  }
+
+  if(state.mode === "m4"){ handleM4Answer(raw); return; }
+  if(state.mode === "m4edit"){ handleM4EditAnswer(raw); return; }
+  if(state.mode === "reflect"){ handleReflectAnswer(raw); return; }
+  if(state.mode === "concept"){
+    const item = CONCEPT_QA.find(i => i.kws.some(k => containsAllWords(norm, k)));
+    if(item){ answerConcept(item); } else { fallbackLimite(); }
+    return;
+  }
+
+  // Coincidencia global (Kerygma / conceptos / módulos) para cualquier otro modo
+  const kMatch = KERYGMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
+  if(kMatch){ botSay(kMatch.a); return; }
+
+  const cMatch = CONCEPT_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
+  if(cMatch){ answerConcept(cMatch); return; }
+
+  const mMatch = MODULES.find(m => norm.includes(normalize(m.label)));
+  if(mMatch){ showModule(mMatch.id); return; }
+
+  fallbackLimite();
+}
+
+/* ---------- EVENTOS DE ENTRADA ---------- */
+document.getElementById("send-btn").addEventListener("click", handleSend);
+document.getElementById("text-input").addEventListener("keydown", e=>{
+  if(e.key === "Enter"){ handleSend(); }
+});
+function handleSend(){
+  const input = document.getElementById("text-input");
+  const val = input.value.trim();
+  if(!val) return;
+  userSay(val);
+  input.value = "";
+  routeFreeText(val);
+}
+
+document.getElementById("privacy-toggle").addEventListener("click", ()=>{
+  document.getElementById("privacy-detail").classList.toggle("open");
+});
+
+/* ---------- INICIO ---------- */
+welcome();
+
+</script>
+</body>
+</html>
