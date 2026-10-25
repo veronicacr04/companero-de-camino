@@ -288,9 +288,9 @@
     <div class="brand-mark">CC</div>
     <div class="brand-text">
       <h1>Compañero de Camino</h1>
-      <p>Asistente educativo de Kerygma Universal Films</p>
+      <p>Asistente educativo del ecosistema de Misión Digital</p>
     </div>
-    <div class="kuf-tag">Fundamentos de<br>Misión Digital</div>
+    <div class="kuf-tag">Ecosistema de<br>Misión Digital</div>
   </header>
 
   <div id="progress-path">
@@ -321,10 +321,27 @@
 
 <script>
 /* =========================================================================
-   COMPAÑERO DE CAMINO — motor conversacional (v2)
-   Basado en: storyboard de la página de Kerygma Universal Films,
-   exportación del curso "Fundamentos de Misión Digital: Fe, Liderazgo y
-   Cultura Digital" y la Plantilla de trabajo — Módulo 4.
+   COMPAÑERO DE CAMINO — motor conversacional (v3)
+   Asistente educativo del ECOSISTEMA de Misión Digital de Kerygma Universal
+   Films (ya no exclusivo del curso Fundamentos de Misión Digital).
+
+   Fuentes reales usadas para esta actualización (ninguna cifra, enlace ni
+   dato institucional de este bloque fue inventado):
+     - Instrucción de la usuaria sobre la arquitectura vigente: Pantalla 3
+       (Formación), Pantalla 4 (YO SOY: OVA interactivo — oferta formativa
+       principal actual) y Pantalla 5 (MISIÓN DIGITAL: ecosistema).
+     - Storyboard "YO SOY — Me conozco. Me cuido. Me integro." (documento
+       con referencias): identidad, 4 módulos, enlaces reales publicados.
+     - Plan Maestro v2.0 del Ecosistema de Innovación y Tecnología
+       Educativa, Cap. 7–8: "Portal de Exploración de la Misión Digital"
+       (OVA en ThingLink/Canva) y mundo inmersivo en FrameVR ("Centro de
+       Innovación y Evangelización Digital").
+     - PDF "OVA — Canva" y enlaces reales de ThingLink/Canva compartidos
+       por la usuaria para el Portal.
+     - Exportación del curso "Fundamentos de Misión Digital: Fe, Liderazgo
+       y Cultura Digital" y la Plantilla de trabajo — Módulo 4 (se
+       conservan íntegros como próxima oferta formativa).
+
    Funciona por completo con lógica programada localmente en el
    navegador (HTML + CSS + JavaScript). No hay conexión con un modelo de
    IA generativa en tiempo real ni envío de datos a servidores externos.
@@ -356,6 +373,94 @@ const KERYGMA_QA = [
   {
     kws: ["como se relaciona el curso","relacion del curso con kerygma","curso y kerygma","propuesta educativa"],
     a: "El curso forma parte del área de Formación de la página educativa de Kerygma. Desde ahí se accede, mediante un enlace, al espacio propio donde se desarrolla todo el recorrido formativo."
+  }
+];
+
+/* ---------- 1bis. ECOSISTEMA DE MISIÓN DIGITAL (Nivel 2) ---------- */
+const ECOSISTEMA_QA = [
+  {
+    kws:["que es el ecosistema","que es el ecosistema de mision digital","ecosistema de mision digital","que es mision digital pantalla"],
+    a:"El ecosistema de Misión Digital de Kerygma Universal Films integra varias experiencias que se complementan: el OVA YO SOY (la oferta formativa principal actual), el Portal de Exploración de la Misión Digital con acceso a la experiencia inmersiva en FrameVR y un simulador HTML, este chatbot educativo, y el curso Fundamentos de Misión Digital como próxima oferta formativa."
+  },
+  {
+    kws:["que incluye el ecosistema","que experiencias incluye","componentes del ecosistema","partes del ecosistema","que integra el ecosistema"],
+    a:"El ecosistema incluye: el Portal de Exploración de la Misión Digital (OVA de acceso), la experiencia inmersiva en FrameVR con su simulador HTML, este chatbot educativo (Compañero de Camino) y el curso Fundamentos de Misión Digital como próxima oferta formativa. El OVA YO SOY es, dentro de este conjunto, la oferta formativa principal disponible actualmente."
+  },
+  {
+    kws:["como se relacionan las experiencias","relacion entre las experiencias","relacion entre las distintas experiencias","como se conectan"],
+    a:"YO SOY es la experiencia principal actual. El Portal de Exploración de la Misión Digital conduce a la experiencia inmersiva en FrameVR y a su simulador, dentro del mismo ecosistema. Este chatbot acompaña el recorrido entre todas ellas. El curso Fundamentos de Misión Digital es la próxima oferta formativa, y conserva su propio acompañamiento (incluido el Módulo 4) para cuando la curses."
+  },
+  {
+    kws:["cual es la experiencia principal actual","cual es la oferta principal","experiencia principal"],
+    a:"La oferta formativa principal disponible actualmente es el OVA interactivo YO SOY · Me conozco. Me cuido. Me integro."
+  },
+  {
+    kws:["cual es la proxima oferta","cual es la siguiente oferta"],
+    a:"La próxima oferta formativa del ecosistema es el curso Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital."
+  }
+];
+
+/* ---------- 1ter. OVA "YO SOY" (Nivel 3 — oferta formativa principal actual) ---------- */
+const OVA_QA = [
+  {
+    kws:["que es yo soy","que es el ova yo soy","que es me conozco me cuido me integro","ova interactivo yo soy"],
+    a:"YO SOY · Me conozco. Me cuido. Me integro. es un Objeto Virtual de Aprendizaje (OVA) interactivo y autónomo de autoconocimiento y autocuidado integral. Se organiza en cuatro módulos — mi cuerpo, mi mente, mis emociones y mi espiritualidad — y es de carácter formativo, no diagnóstico. Es la oferta formativa principal disponible actualmente dentro del ecosistema."
+  },
+  {
+    kws:["cual es el objetivo de yo soy","objetivo de yo soy","proposito de yo soy","para que sirve yo soy"],
+    a:"Su objetivo general es promover la toma de conciencia sobre el cuidado integral de la persona, a través de microdecisiones, experiencias cotidianas y retroalimentación formativa inmediata, sin diagnosticar ni calificar a quien participa."
+  },
+  {
+    kws:["como se accede a yo soy","como entro a yo soy","enlace de yo soy","acceso a yo soy","donde esta yo soy","link de yo soy"],
+    a:"Puedes acceder directamente en <a href=\"https://veronicacr04.github.io/Yo-soy/\" target=\"_blank\" rel=\"noopener\">veronicacr04.github.io/Yo-soy</a> — también hay un acceso directo a cada módulo: cuerpo, mente, emociones y espiritualidad."
+  },
+  {
+    kws:["que tipo de experiencia ofrece yo soy","como funciona yo soy","que incluyen los modulos de yo soy"],
+    a:"Ofrece una experiencia de una sola pantalla activa, con microescenas de la vida cotidiana, elecciones y retroalimentación inmediata, con posibilidad de profundizar de forma opcional. No hay respuestas correctas ni puntuación que mida el valor de la persona."
+  },
+  {
+    kws:["como se relaciona yo soy con el ecosistema","relacion de yo soy con el ecosistema"],
+    a:"Dentro del ecosistema de Misión Digital, YO SOY es la oferta formativa principal actual; el resto de las experiencias (Portal de Exploración, FrameVR, simulador y curso) se articulan alrededor de ella."
+  }
+];
+
+/* ---------- 1quater. EXPERIENCIA INMERSIVA: Portal + FrameVR (Nivel 4) ---------- */
+const INMERSIVA_QA = [
+  {
+    kws:["que es la experiencia inmersiva","que es el mundo inmersivo","que es frame vr","que es framevr"],
+    a:"La experiencia inmersiva es un mundo construido en FrameVR, llamado Centro de Innovación y Evangelización Digital. Se accede a través del Portal de Exploración de la Misión Digital, que funciona como su puerta de entrada dentro del ecosistema."
+  },
+  {
+    kws:["que es el portal","portal de exploracion","que es el portal de exploracion de la mision digital"],
+    a:"El Portal de Exploración de la Misión Digital es un OVA (hecho en ThingLink/Canva) que prepara y orienta antes de ingresar al mundo inmersivo. Tiene un Lobby de bienvenida y tres salas: Sala 1, Comprende la Misión Digital; Sala 2, Descubre tus talentos con Carlo Acutis; y Sala 3, Diseña tu Proyecto de Misión Digital, donde está el simulador interactivo."
+  },
+  {
+    kws:["que es el simulador","simulador html","simulador de mision digital"],
+    a:"El simulador HTML está dentro de la Sala 3 del Portal y permite identificar talentos, la comunidad a la que se desea servir y el espacio donde se puede generar mayor impacto, como primer paso para diseñar un Proyecto de Misión Digital."
+  },
+  {
+    kws:["como accedo al portal","enlace del portal","link del portal","donde veo el portal","acceso al portal"],
+    a:"Puedes explorar el Portal de Exploración de la Misión Digital en <a href=\"https://www.thinglink.com/view/scene/2134885547464720870\" target=\"_blank\" rel=\"noopener\">ThingLink</a> o en su versión de <a href=\"https://canva.link/v9yf68boxv93c8v\" target=\"_blank\" rel=\"noopener\">Canva</a>."
+  },
+  {
+    kws:["para que sirve la experiencia inmersiva dentro del ecosistema","como funciona como introduccion","como se relaciona con otros componentes"],
+    a:"Funciona como un hook o gancho motivacional: despierta interés y favorece un primer discernimiento, sin sustituir ni al OVA YO SOY ni al curso. Es uno de los componentes del ecosistema, junto con el Portal, el simulador, este chatbot y la próxima oferta formativa."
+  }
+];
+
+/* ---------- 1quinquies. PRÓXIMA OFERTA FORMATIVA (Nivel 5) ---------- */
+const PROXIMA_QA = [
+  {
+    kws:["que es fundamentos de mision digital","de que trata el curso","que es el curso"],
+    a:"Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital es la próxima oferta formativa del ecosistema. Es un curso que acompaña, paso a paso, la construcción de una propuesta real de misión digital, trabajando identidad digital, cultura digital, liderazgo pastoral y discernimiento."
+  },
+  {
+    kws:["es la oferta principal","es la experiencia principal el curso","sigue siendo la oferta principal"],
+    a:"No: Fundamentos de Misión Digital ya no es la oferta principal actual — esa posición corresponde ahora al OVA YO SOY. El curso se presenta como la próxima oferta formativa del ecosistema."
+  },
+  {
+    kws:["cual es la relacion del curso con el ecosistema","como se relaciona el curso con el ecosistema"],
+    a:"El curso es uno de los componentes del ecosistema de Misión Digital, pensado como el siguiente paso formativo después de explorar el OVA YO SOY, el Portal y la experiencia inmersiva."
   }
 ];
 
@@ -652,27 +757,131 @@ function renderPath(){
 function goMenu(){
   state.mode = "menu";
   renderPath();
-  const m4Label = Object.keys(state.m4Answers).length > 0
-    ? "Continuar mi propuesta de misión digital"
-    : "Construir mi propuesta de misión digital";
   setQuickReplies([
     {label:"Conocer Kerygma", action: goKerygma},
-    {label:"Explorar el curso", action: goCourse},
-    {label:"Comprender un tema", action: goConcept},
-    {label:"Reflexionar sobre mi camino", action: goReflect},
-    {label:"Comprobar lo aprendido", action: goCheckMenu},
-    {label:m4Label, action: goM4, gold:true}
+    {label:"Explorar el ecosistema de Misión Digital", action: goEcosistema},
+    {label:"Conocer el OVA Yo Soy", action: goOVA, gold:true},
+    {label:"Descubrir la experiencia inmersiva", action: goInmersiva},
+    {label:"Conocer la próxima oferta formativa", action: goProximaOferta},
+    {label:"Hacer una pregunta", action: goAskQuestion}
   ]);
 }
 
 function welcome(){
   botSay(
-    "¡Bienvenido/a!<br>Soy <strong>Compañero de Camino</strong>, el asistente educativo de Kerygma Universal Films.\n\n" +
-    "Estoy aquí para acompañarte durante tu recorrido por <em>Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital</em>.\n\n" +
-    "Puedes conocer más sobre Kerygma, explorar los contenidos del curso, aclarar conceptos, reflexionar sobre tu experiencia y, especialmente, recibir acompañamiento paso a paso para diseñar tu propuesta de misión digital.\n\n" +
-    "¿En qué parte del camino deseas comenzar?"
+    "¡Bienvenido/a!<br>Soy <strong>Compañero de Camino</strong>, el asistente educativo del ecosistema de Misión Digital de Kerygma Universal Films.\n\n" +
+    "Puedo ayudarte a conocer a Kerygma, explorar el ecosistema de Misión Digital, conocer el OVA Yo Soy, descubrir la experiencia inmersiva y orientarte sobre la próxima oferta formativa, Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital.\n\n" +
+    "¿Por dónde quieres comenzar tu camino?"
   );
   goMenu();
+}
+
+/* ---------- Ayuda para responder primero y navegar después (corrección del
+   profesor: nunca sustituir una respuesta directa por una simple redirección) */
+function offerLevelNav(chips){
+  setQuickReplies(chips);
+}
+const NAV_KERYGMA = [
+  {label:"Conocer más sobre Kerygma", action: goKerygma},
+  {label:"Explorar el ecosistema", action: goEcosistema},
+  {label:"⬅ Volver al menú", action: goMenu}
+];
+const NAV_ECOSISTEMA = [
+  {label:"Conocer el OVA Yo Soy", action: goOVA},
+  {label:"Descubrir la experiencia inmersiva", action: goInmersiva},
+  {label:"Conocer la próxima oferta formativa", action: goProximaOferta},
+  {label:"⬅ Volver al menú", action: goMenu}
+];
+const NAV_OVA = [
+  {label:"Explorar el ecosistema", action: goEcosistema},
+  {label:"Descubrir la experiencia inmersiva", action: goInmersiva},
+  {label:"⬅ Volver al menú", action: goMenu}
+];
+const NAV_INMERSIVA = [
+  {label:"Explorar el ecosistema", action: goEcosistema},
+  {label:"Conocer el OVA Yo Soy", action: goOVA},
+  {label:"⬅ Volver al menú", action: goMenu}
+];
+const NAV_PROXIMA = [
+  {label:"Explorar los módulos del curso", action: goCourse},
+  {label:"Volver al ecosistema", action: goEcosistema},
+  {label:"⬅ Volver al menú", action: goMenu}
+];
+
+/* ---------- NIVEL 2: ECOSISTEMA DE MISIÓN DIGITAL ---------- */
+function goEcosistema(){
+  state.mode = "ecosistema";
+  renderPath();
+  botSay("Puedes preguntarme, por ejemplo: <em>“¿Qué es el ecosistema de Misión Digital?”</em> o <em>“¿Cómo se relacionan las experiencias?”</em>. También puedes escribir tu propia pregunta abajo.");
+  setQuickReplies([
+    {label:"¿Qué incluye el ecosistema?", action:()=>answerFromQA(ECOSISTEMA_QA,"que incluye el ecosistema",NAV_ECOSISTEMA)},
+    {label:"¿Cuál es la experiencia principal actual?", action:()=>answerFromQA(ECOSISTEMA_QA,"cual es la experiencia principal actual",NAV_ECOSISTEMA)},
+    {label:"¿Cómo se relacionan las experiencias?", action:()=>answerFromQA(ECOSISTEMA_QA,"como se relacionan las experiencias",NAV_ECOSISTEMA)},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+
+/* ---------- NIVEL 3: OVA "YO SOY" ---------- */
+function goOVA(){
+  state.mode = "ova";
+  renderPath();
+  botSay("Puedes preguntarme, por ejemplo: <em>“¿Qué es Yo Soy?”</em>, <em>“¿Cuál es su objetivo?”</em> o <em>“¿Cómo se accede?”</em>. También puedes escribir tu propia pregunta abajo.");
+  setQuickReplies([
+    {label:"¿Qué es Yo Soy?", action:()=>answerFromQA(OVA_QA,"que es yo soy",NAV_OVA)},
+    {label:"¿Cuál es su objetivo?", action:()=>answerFromQA(OVA_QA,"cual es el objetivo de yo soy",NAV_OVA)},
+    {label:"¿Cómo se accede?", action:()=>answerFromQA(OVA_QA,"como se accede a yo soy",NAV_OVA)},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+
+/* ---------- NIVEL 4: EXPERIENCIA INMERSIVA ---------- */
+function goInmersiva(){
+  state.mode = "inmersiva";
+  renderPath();
+  botSay("Puedes preguntarme, por ejemplo: <em>“¿Qué es el Portal de Exploración?”</em> o <em>“¿Cómo accedo al portal?”</em>. También puedes escribir tu propia pregunta abajo.");
+  setQuickReplies([
+    {label:"¿Qué es la experiencia inmersiva?", action:()=>answerFromQA(INMERSIVA_QA,"que es la experiencia inmersiva",NAV_INMERSIVA)},
+    {label:"¿Qué es el Portal de Exploración?", action:()=>answerFromQA(INMERSIVA_QA,"que es el portal",NAV_INMERSIVA)},
+    {label:"¿Cómo accedo al portal?", action:()=>answerFromQA(INMERSIVA_QA,"como accedo al portal",NAV_INMERSIVA)},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+
+/* ---------- NIVEL 5: PRÓXIMA OFERTA FORMATIVA (antes, eje principal) ---------- */
+function goProximaOferta(){
+  state.mode = "proxima";
+  renderPath();
+  const m4Label = Object.keys(state.m4Answers).length > 0
+    ? "Continuar mi propuesta de misión digital"
+    : "Construir mi propuesta de misión digital";
+  botSay("Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital es la próxima oferta formativa del ecosistema. Aquí puedes explorar sus módulos, aclarar conceptos, reflexionar y recibir acompañamiento para diseñar una propuesta de misión digital.");
+  setQuickReplies([
+    {label:"Explorar los módulos del curso", action: goCourse},
+    {label:"Comprender un tema", action: goConcept},
+    {label:"Reflexionar sobre mi camino", action: goReflect},
+    {label:"Comprobar lo aprendido", action: goCheckMenu},
+    {label:m4Label, action: goM4, gold:true},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+}
+
+/* ---------- HACER UNA PREGUNTA (texto libre) ---------- */
+function goAskQuestion(){
+  state.mode = "menu";
+  renderPath();
+  botSay("Escribe tu pregunta abajo — por ejemplo sobre Kerygma, el ecosistema, el OVA Yo Soy, la experiencia inmersiva o la próxima oferta formativa. Primero te respondo directamente y después te ofrezco opciones para profundizar o navegar.");
+  setQuickReplies([
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
+  document.getElementById("text-input").focus();
+}
+
+/* Responde de forma directa a partir de un arreglo QA y una clave conocida,
+   y luego ofrece navegación — nunca sustituye la respuesta por botones. */
+function answerFromQA(qaList, matchKey, navChips){
+  const item = qaList.find(q => q.kws.includes(matchKey));
+  if(item){ botSay(item.a); offerLevelNav(navChips); }
+  else { fallbackLimite(); }
 }
 
 /* ---------- NIVEL 1: CONOCER KERYGMA ---------- */
@@ -692,9 +901,9 @@ function answerKerygmaByKey(matchKey){
   const item = KERYGMA_QA.find(q => q.kws.includes(matchKey));
   if(item){
     botSay(item.a);
-    botSay("¿Quieres conocer el recorrido formativo del curso?");
+    botSay("¿Quieres conocer el ecosistema de Misión Digital que surge de esta visión?");
     setQuickReplies([
-      {label:"Sí, quiero conocer el curso", action: goCourse},
+      {label:"Sí, explorar el ecosistema", action: goEcosistema},
       {label:"Otra pregunta sobre Kerygma", action: goKerygma},
       {label:"⬅ Volver al menú", action: goMenu}
     ]);
@@ -703,12 +912,13 @@ function answerKerygmaByKey(matchKey){
   }
 }
 
-/* ---------- NIVEL 2: EXPLORAR EL CURSO ---------- */
+/* ---------- MÓDULOS DE LA PRÓXIMA OFERTA FORMATIVA (el curso) ---------- */
 function goCourse(){
   state.mode = "course";
   renderPath();
-  botSay("El curso se organiza como un camino de cuatro pasos, además de una introducción y un cierre. ¿Qué etapa quieres explorar?");
+  botSay("El curso Fundamentos de Misión Digital (próxima oferta formativa) se organiza como un camino de cuatro pasos, además de una introducción y un cierre. ¿Qué etapa quieres explorar?");
   const opts = MODULES.map(m => ({label:m.label, action: ()=>showModule(m.id)}));
+  opts.push({label:"⬅ Volver a la próxima oferta", action: goProximaOferta});
   opts.push({label:"⬅ Volver al menú", action: goMenu});
   setQuickReplies(opts);
 }
@@ -1024,9 +1234,25 @@ function routeFreeText(raw){
     return;
   }
 
-  // Coincidencia global (Kerygma / conceptos / módulos) para cualquier otro modo
+  /* Coincidencia global por los cinco niveles de conocimiento, para que
+     cualquier pregunta escrita libremente reciba SIEMPRE una respuesta
+     directa y breve primero, y solo después botones de navegación —
+     corrección específica a la retroalimentación del profesor: nunca
+     sustituir una respuesta directa por una simple redirección. */
   const kMatch = KERYGMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
-  if(kMatch){ botSay(kMatch.a); return; }
+  if(kMatch){ botSay(kMatch.a); offerLevelNav(NAV_KERYGMA); return; }
+
+  const eMatch = ECOSISTEMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
+  if(eMatch){ botSay(eMatch.a); offerLevelNav(NAV_ECOSISTEMA); return; }
+
+  const oMatch = OVA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
+  if(oMatch){ botSay(oMatch.a); offerLevelNav(NAV_OVA); return; }
+
+  const iMatch = INMERSIVA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
+  if(iMatch){ botSay(iMatch.a); offerLevelNav(NAV_INMERSIVA); return; }
+
+  const pMatch = PROXIMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
+  if(pMatch){ botSay(pMatch.a); offerLevelNav(NAV_PROXIMA); return; }
 
   const cMatch = CONCEPT_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(cMatch){ answerConcept(cMatch); return; }
