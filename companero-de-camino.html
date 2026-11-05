@@ -6,53 +6,47 @@
 <title>Compañero de Camino — Kerygma Universal Films</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- Nota: tipografía tomada del Plan Maestro v2.0, Cap. 11.2 (títulos en serif elegante,
-     textos en sans-serif limpia). Si esta página se abre sin conexión a internet, el
-     navegador usa automáticamente las alternativas locales indicadas en font-family. -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
+<!-- Tipografía: Montserrat (sans-serif limpia, coherente con la referencia visual). Sin conexión,
+     el navegador usa las alternativas locales indicadas en font-family. -->
 <style>
   /* ================================================================
-     PALETA — identidad principal: Kerygma Universal Films (teal y turquesa).
+     PALETA — referencia visual: fondo blanco luminoso, teal profundo como
+     color institucional dominante, turquesa solo como apoyo suave, dorado
+     como acento y azul del personaje en detalles puntuales.
 
-     MARCA INSTITUCIONAL: valores muestreados de los logotipos oficiales
-     KUF-13.png y KUF-01.png (teal #085c60, turquesa medio #74b8c4, azul
-     claro #cce4e4, dorado #d8a030, gris #84888c). Para dar más presencia a
-     la identidad se derivaron dos turquesas más saturadas (misma tonalidad
-     del turquesa del logo): --turq (#1b9fb5) y --turq-deep (#0d7f93). Son
-     derivaciones de diseño a partir de los logos, no colores oficiales.
-     El dorado queda como acento cálido (CTA y detalles).
-
-     IDENTIDAD DIGITAL (acentos, nunca fondo dominante): azul y violeta
-     muestreados de la ilustración aprobada de Compañero de Camino.
+     MARCA INSTITUCIONAL (muestreada de KUF-13.png / KUF-01.png):
+       teal #085c60 · turquesa medio #74b8c4 · azul claro #cce4e4 ·
+       dorado #d8a030.
+     DERIVADOS DE DISEÑO (no son colores oficiales): turquesa de superficie
+       #e2f2f4 / #eef7f8 (tintes muy suaves del turquesa del logo),
+       turquesa de interacción #0d7f93 y teal oscuro #063f43.
+     PERSONAJE: azul de la sudadera → --dig-blue (#3d4bb8, ajustado para
+       texto blanco). Violeta: solo acento digital puntual (no se usa como
+       fondo).
 
      ACCESIBILIDAD (WCAG 2.2 AA): cada par texto/fondo se validó con la
      fórmula de contraste de WCAG. Texto normal ≥ 4.5:1; texto grande y
-     componentes gráficos ≥ 3:1. Un color del logo NO se usa como texto si
-     no alcanza el contraste: se ajusta el fondo o el color del texto.
+     componentes ≥ 3:1. El dorado se usa como acento: cuando lleva texto,
+     el texto es oscuro (--ink).
      ================================================================ */
   :root{
-    /* Kerygma Universal Films (KUF-13.png / KUF-01.png) */
     --kuf-teal-deep:#085c60;
-    --kuf-teal-dark:#063f43;   /* variante más oscura del teal, solo franja inferior */
+    --kuf-teal-dark:#063f43;
     --kuf-teal-mid:#74b8c4;
     --kuf-light:#cce4e4;
     --kuf-gold:#d8a030;
     --kuf-gold-soft:#f1d69a;
-    /* Turquesas saturadas derivadas del logo */
-    --turq:#1b9fb5;
     --turq-deep:#0d7f93;
-    --turq-surface:#a4dbe5;    /* fondo del área de conversación */
-    --turq-dots:#8fcad7;
-    /* Identidad digital complementaria (ilustración aprobada) */
-    --dig-blue:#3d4bb8;        /* azul de la ilustración, ajustado para contraste con texto blanco */
-    --dig-violet:#522cbd;
-    /* Texto y neutros */
+    --turq-wash:#e2f2f4;       /* fondo muy suave: pastilla, hover */
+    --turq-bubble:#eef7f8;     /* burbuja del asistente */
+    --turq-line:#c5dfe3;       /* líneas finas de separación */
+    --dig-blue:#3d4bb8;        /* azul del personaje (mensajes del usuario) */
+    --dig-violet:#522cbd;      /* acento digital, reservado */
     --ink:#0f2f31;
     --ink-soft:#2f4f51;
-    --surface:#ffffff;
-    --on-teal:#e6f4f4;         /* texto claro sobre teal profundo */
+    --on-teal:#e6f4f4;
     --placeholder:#566a6c;
-
     --radius:14px;
     font-size:16px;
   }
@@ -61,168 +55,187 @@
   body{
     margin:0;
     font-family:'Montserrat',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--kuf-teal-deep);
+    background:#f3f8f9;
     color:var(--ink);
     display:flex;
     justify-content:center;
   }
   #app{
+    position:relative;
+    overflow:hidden;
     width:100%;
     max-width:720px;
-    min-height:100vh;
+    height:100vh;
+    height:100dvh;
     display:flex;
     flex-direction:column;
-    background:var(--turq-surface);
-    box-shadow:0 0 40px rgba(6,63,67,0.35);
+    background:#fff;
+    box-shadow:0 0 30px rgba(8,92,96,0.12);
   }
+  /* Formas curvas suaves de fondo (decorativas): turquesa arriba, dorado abajo */
+  #app::before,#app::after{content:"";position:absolute;pointer-events:none;z-index:0;background-repeat:no-repeat;}
+  #app::before{
+    top:0;right:0;width:min(78%,440px);height:210px;background-position:top right;background-size:contain;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 440 210%22%3E%3Cdefs%3E%3ClinearGradient id=%22a%22 x1=%221%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23bfe3ea%22 stop-opacity=%22.85%22/%3E%3Cstop offset=%221%22 stop-color=%22%23e2f2f4%22 stop-opacity=%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M440 0V170C350 165 250 110 170 0Z%22 fill=%22url(%23a)%22/%3E%3Cpath d=%22M175 0C255 105 350 160 440 168%22 fill=%22none%22 stroke=%22%23d8a030%22 stroke-opacity=%22.55%22 stroke-width=%222%22/%3E%3C/svg%3E");
+  }
+  #app::after{
+    bottom:0;right:0;width:min(86%,520px);height:150px;background-position:bottom right;background-size:contain;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 520 150%22%3E%3Cdefs%3E%3ClinearGradient id=%22b%22 x1=%220%22 y1=%221%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%23f1d69a%22 stop-opacity=%220%22/%3E%3Cstop offset=%221%22 stop-color=%22%23f1d69a%22 stop-opacity=%22.75%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M0 150C170 140 350 110 520 28V150Z%22 fill=%22url(%23b)%22/%3E%3Cpath d=%22M60 150C220 138 380 100 520 22%22 fill=%22none%22 stroke=%22%23d8a030%22 stroke-opacity=%22.6%22 stroke-width=%222%22/%3E%3C/svg%3E");
+  }
+  #app > *{position:relative;z-index:1;}
 
-  /* Anillo de foco visible sobre fondos claros y oscuros (halo blanco + trazo oscuro) */
+  /* Anillo de foco visible sobre fondos claros (trazo oscuro + halo blanco) */
   .chip:focus-visible,#send-btn:focus-visible,#privacy-bar button:focus-visible,#text-input:focus-visible{
     outline:3px solid var(--ink);
     outline-offset:2px;
     box-shadow:0 0 0 2px #fff;
   }
 
-  /* ---------- HEADER (identidad Kerygma Universal Films) ---------- */
+  /* ---------- ENCABEZADO DE CONVERSACIÓN (estado 2) ---------- */
   header{
-    position:relative;
-    background:var(--kuf-teal-deep);
-    color:#fff;
-    padding:12px 18px 14px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    border-bottom:4px solid var(--kuf-gold);
+    display:flex;align-items:center;gap:12px;
+    padding:10px 16px;
+    background:rgba(255,255,255,.92);
+    border-bottom:1px solid var(--turq-line);
   }
-  .brand-logo{
-    width:52px;height:52px;flex:0 0 52px;display:block;
-    background:#fff;border-radius:50%;padding:2px;
-  }
+  .is-welcome header{display:none;}
+  .brand-logo{width:44px;height:44px;flex:0 0 44px;display:block;border-radius:50%;}
   .brand-text{min-width:0;}
   .brand-text h1{
-    font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;
-    font-size:1.45rem;
-    font-weight:700;
-    margin:0;
-    line-height:1.15;
-    letter-spacing:.2px;
-    color:#fff;
+    font-size:1.12rem;font-weight:700;margin:0;line-height:1.2;
+    color:var(--kuf-teal-deep);
   }
-  .brand-text p{
-    margin:2px 0 0;
-    font-size:.8rem;
-    color:var(--on-teal);
-    font-style:italic;
-    line-height:1.3;
-  }
-  .kuf-tag{
-    margin-left:auto;
-    font-size:.72rem;
-    text-align:right;
-    color:var(--kuf-gold-soft);
-    line-height:1.3;
-    max-width:110px;
-    flex:0 0 auto;
-    font-weight:600;
-  }
-  @media (max-width:520px){ .kuf-tag{display:none;} }
+  .brand-text p{margin:1px 0 0;font-size:.74rem;color:var(--ink-soft);line-height:1.3;}
 
-  /* ---------- PROGRESS PATH (Módulo 4) ---------- */
-  #progress-path{
-    display:none;
-    background:var(--turq-deep);
-    padding:12px 16px 8px;
-    border-bottom:3px solid var(--kuf-gold);
+  /* ---------- BIENVENIDA (estado 1): personaje protagonista ---------- */
+  #hero{display:none;flex:1;min-height:0;overflow-y:auto;padding:16px 22px 14px;}
+  .is-welcome #hero{display:block;}
+  .is-welcome #chat{display:none;}
+  .hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .hero-logo{height:78px;width:auto;max-width:46%;display:block;object-fit:contain;}
+  .hero-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 16px;border-radius:999px;
+    background:var(--turq-wash);color:var(--kuf-teal-deep);
+    font-size:.82rem;font-weight:600;line-height:1.2;
   }
+  .hero-pill svg{width:22px;height:22px;flex:0 0 22px;}
+  .hero-title{
+    margin:12px 0 0;
+    font-size:clamp(1.75rem,6.4vw,2.45rem);
+    font-weight:700;font-style:italic;line-height:1.1;
+    color:var(--kuf-teal-deep);
+  }
+  .hero-rule{width:min(240px,58%);height:10px;margin:6px 0 0;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 240 10%22%3E%3Cdefs%3E%3ClinearGradient id=%22c%22 x1=%220%22 x2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%23d8a030%22 stop-opacity=%22.2%22/%3E%3Cstop offset=%22.5%22 stop-color=%22%23d8a030%22/%3E%3Cstop offset=%221%22 stop-color=%22%23d8a030%22 stop-opacity=%22.2%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=%22M2 7C60 1 150 1 238 5%22 fill=%22none%22 stroke=%22url(%23c)%22 stroke-width=%224%22 stroke-linecap=%22round%22/%3E%3C/svg%3E") no-repeat left center/contain;}
+  .hero-body{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    grid-template-rows:auto auto 1fr;
+    grid-template-areas:"fig bubble" "fig text" "fig opts";
+    column-gap:20px;row-gap:8px;
+    align-items:start;
+    margin-top:14px;
+  }
+  .hero-fig{grid-area:fig;align-self:end;}
+  .hero-fig img{display:block;height:clamp(300px,calc(100dvh - 330px),480px);width:auto;}
+  .hero-bubble-wrap{grid-area:bubble;padding-left:12px;}
+  .hero-bubble{
+    position:relative;display:inline-block;margin:0;
+    background:#fff;border:2px solid var(--kuf-gold);border-radius:26px;
+    padding:12px 20px;font-size:1.12rem;font-weight:500;line-height:1.3;color:var(--ink-soft);
+  }
+  .hero-bubble em{font-weight:700;color:var(--kuf-teal-deep);}
+  .hero-bubble::before{
+    content:"";position:absolute;left:-9px;bottom:18px;width:14px;height:14px;background:#fff;
+    border-left:2px solid var(--kuf-gold);border-bottom:2px solid var(--kuf-gold);transform:rotate(45deg);
+  }
+  .hero-text{grid-area:text;margin-top:6px;}
+  .hero-lead{margin:0 0 8px;font-size:.98rem;line-height:1.5;color:var(--ink);}
+  .hero-ask{margin:0;font-size:1.02rem;font-weight:700;color:var(--kuf-teal-deep);}
+  #hero-options{grid-area:opts;margin-top:6px;}
+
+  /* Las respuestas rápidas viven en la bienvenida (columna) y, al conversar,
+     en una barra limpia sobre el campo de texto. */
+  #quick-replies{
+    display:flex;flex-wrap:wrap;gap:8px;
+    padding:10px 14px;
+    border-top:1px solid var(--turq-line);
+    background:rgba(255,255,255,.94);
+  }
+  .is-welcome #quick-replies{
+    flex-direction:column;flex-wrap:nowrap;gap:9px;padding:0;border:0;background:none;max-width:380px;
+  }
+  .is-welcome .chip{width:100%;text-align:left;}
+
+  .chip{
+    min-height:44px;
+    border:2px solid var(--kuf-teal-deep);
+    color:var(--kuf-teal-deep);
+    background:#fff;
+    padding:8px 18px;
+    border-radius:24px;
+    font-size:.88rem;font-weight:600;font-family:inherit;line-height:1.25;
+    cursor:pointer;
+    transition:background .15s ease,color .15s ease;
+  }
+  .chip:hover{background:var(--kuf-teal-deep);color:#fff;}
+  .chip.gold{background:var(--kuf-gold);border-color:var(--kuf-gold);color:var(--ink);}
+  .chip.gold:hover{background:var(--kuf-teal-deep);border-color:var(--kuf-teal-deep);color:#fff;}
+
+  /* ---------- RUTA DE PROGRESO (Módulo 4) ---------- */
+  #progress-path{display:none;background:rgba(255,255,255,.94);padding:10px 16px 6px;border-bottom:1px solid var(--turq-line);}
   #progress-path.active{display:block;}
   .path-row{display:flex;align-items:flex-start;overflow-x:auto;gap:2px;padding-bottom:4px;}
-  .path-step{
-    flex:1 1 0;
-    min-width:64px;
-    text-align:center;
-    position:relative;
-  }
+  .path-step{flex:1 1 0;min-width:64px;text-align:center;position:relative;}
   .path-step .dot{
-    width:24px;height:24px;border-radius:50%;
-    background:#fff;
-    border:2px solid #fff;
+    width:26px;height:26px;border-radius:50%;
+    background:#fff;border:2px solid var(--kuf-teal-deep);
     margin:0 auto 4px;
     display:flex;align-items:center;justify-content:center;
-    font-size:.72rem;font-weight:700;color:var(--kuf-teal-deep);
+    font-size:.74rem;font-weight:700;color:var(--kuf-teal-deep);
     position:relative;z-index:1;
   }
   .path-step:not(:last-child)::after{
-    content:"";
-    position:absolute;
-    top:11px;left:calc(50% + 14px);
-    width:calc(100% - 14px);
-    height:2px;background:rgba(255,255,255,.55);
-    z-index:0;
+    content:"";position:absolute;top:12px;left:calc(50% + 15px);
+    width:calc(100% - 15px);height:2px;background:var(--turq-line);z-index:0;
   }
-  /* El estado no depende solo del color: completado = ✓, actual = anillo dorado + etiqueta en negrita */
+  /* El estado no depende solo del color: completado = ✓, actual = anillo dorado + etiqueta subrayada */
   .path-step.done .dot{background:var(--kuf-teal-deep);color:#fff;}
-  .path-step.done:not(:last-child)::after{background:#fff;}
-  .path-step.current .dot{background:var(--kuf-gold);border-color:#fff;color:var(--ink);box-shadow:0 0 0 3px var(--kuf-gold);}
-  .path-step span.label{
-    font-size:.72rem;color:#fff;
-    display:block;line-height:1.15;
-  }
-  .path-step.current span.label{font-weight:700;text-decoration:underline;text-underline-offset:2px;}
+  .path-step.done:not(:last-child)::after{background:var(--kuf-teal-deep);}
+  .path-step.current .dot{background:var(--kuf-gold);color:var(--ink);box-shadow:0 0 0 3px #fff,0 0 0 5px var(--kuf-teal-deep);}
+  .path-step span.label{font-size:.72rem;color:var(--ink-soft);display:block;line-height:1.15;}
+  .path-step.current span.label{font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:2px;}
 
-  /* ---------- CHAT AREA ---------- */
+  /* ---------- CONVERSACIÓN ---------- */
   #chat{
-    flex:1;
+    flex:1;min-height:0;
     overflow-y:auto;
-    padding:16px 14px 6px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    background-color:var(--turq-surface);
-    background-image:radial-gradient(var(--turq-dots) 1.5px, transparent 1.5px);
-    background-size:22px 22px;
-    background-position:-4px -4px;
+    padding:16px 14px 8px;
+    display:flex;flex-direction:column;gap:12px;
+    animation:fadein .25s ease;
   }
-  .brand-card{
-    align-self:center;
-    display:flex;flex-direction:column;align-items:center;gap:4px;
-    padding:8px 18px;
-    text-align:center;
-    background:#fff;
-    border:2px solid var(--kuf-teal-deep);
-    border-radius:16px;
-  }
-  .brand-card img{width:132px;max-width:60%;height:auto;display:block;}
-  .brand-card span{font-size:.75rem;color:var(--ink-soft);}
+  @keyframes fadein{from{opacity:0;}to{opacity:1;}}
 
-  .row-bot{
-    display:flex;align-items:flex-start;gap:8px;
-    align-self:flex-start;
-    max-width:94%;
-  }
+  .row-bot{display:flex;align-items:flex-start;gap:8px;align-self:flex-start;max-width:94%;}
   .avatar{
-    width:38px;height:38px;flex:0 0 38px;
-    border-radius:50%;
-    object-fit:cover;
-    background:#fff;
-    border:2px solid var(--kuf-gold);
-    margin-top:2px;
+    width:38px;height:38px;flex:0 0 38px;border-radius:50%;object-fit:cover;
+    background:#fff;border:2px solid var(--kuf-gold);margin-top:2px;
   }
-  .msg{max-width:82%;padding:11px 14px;line-height:1.5;font-size:.95rem;}
+  .msg{max-width:82%;padding:11px 15px;line-height:1.5;font-size:.95rem;}
   .msg p{margin:0 0 8px;}
   .msg p:last-child{margin-bottom:0;}
   .msg.bot{
     align-self:flex-start;
-    background:#fff;
-    border:2px solid var(--kuf-teal-deep);
-    border-radius:4px 16px 16px 16px;
+    background:var(--turq-bubble);
+    border:1px solid var(--turq-line);
+    border-radius:4px 18px 18px 18px;
     color:var(--ink);
   }
   .row-bot .msg.bot{max-width:none;min-width:0;}
   .msg.user{
     align-self:flex-end;
-    background:var(--dig-blue);
-    color:#fff;
-    border-radius:16px 4px 16px 16px;
+    background:var(--dig-blue);color:#fff;
+    border-radius:18px 4px 18px 18px;
   }
   .msg.bot.system-note{
     background:transparent;border:1px dashed var(--kuf-teal-deep);
@@ -236,117 +249,124 @@
   .checklist li.ok::before{content:"✓ ";color:var(--kuf-teal-deep);font-weight:700;}
   .checklist li.pending::before{content:"— ";color:var(--ink-soft);}
 
-  /* ---------- QUICK REPLIES (zona de navegación en turquesa) ---------- */
-  #quick-replies{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    padding:12px 14px;
-    background:var(--turq-deep);
-    border-top:3px solid var(--kuf-gold);
-  }
-  .chip{
-    min-height:44px;
-    border:2px solid #fff;
-    color:var(--kuf-teal-deep);
-    background:#fff;
-    padding:8px 16px;
-    border-radius:22px;
-    font-size:.88rem;
-    font-weight:600;
-    font-family:inherit;
-    cursor:pointer;
-    transition:background .15s ease, color .15s ease;
-  }
-  .chip:hover{background:var(--kuf-gold);border-color:var(--kuf-gold);color:var(--ink);}
-  .chip.gold{background:var(--kuf-gold);border-color:#fff;color:var(--ink);}
-  .chip.gold:hover{background:var(--kuf-teal-deep);border-color:#fff;color:#fff;}
-
-  /* ---------- INPUT ---------- */
-  #input-row{
-    display:flex;
-    gap:8px;
-    padding:12px 14px;
-    background:var(--kuf-teal-deep);
-  }
+  /* ---------- CAMPO DE TEXTO ---------- */
+  #input-row{display:flex;gap:8px;padding:10px 14px;}
   #text-input{
-    flex:1;
-    min-width:0;
-    min-height:44px;
-    padding:11px 16px;
-    border-radius:24px;
-    border:2px solid #fff;
-    background:#fff;
-    color:var(--ink);
-    font-size:1rem;
-    font-family:inherit;
+    flex:1;min-width:0;min-height:44px;
+    padding:11px 18px;border-radius:24px;
+    border:2px solid var(--kuf-teal-deep);
+    background:#fff;color:var(--ink);
+    font-size:1rem;font-family:inherit;
   }
   #text-input::placeholder{color:var(--placeholder);opacity:1;}
-  #text-input:focus{border-color:var(--kuf-gold);}
   #send-btn{
-    background:var(--kuf-gold);
-    color:var(--ink);
-    border:2px solid #fff;
-    border-radius:50%;
-    width:46px;height:46px;
-    font-size:1.1rem;
-    cursor:pointer;
-    flex:0 0 46px;
+    background:var(--kuf-teal-deep);color:#fff;
+    border:2px solid var(--kuf-teal-deep);border-radius:50%;
+    width:46px;height:46px;flex:0 0 46px;
+    font-size:1.1rem;cursor:pointer;
   }
-  #send-btn:hover{background:#fff;color:var(--kuf-teal-deep);}
+  #send-btn:hover{background:var(--kuf-gold);border-color:var(--kuf-gold);color:var(--ink);}
 
-  /* ---------- PRIVACY FOOTER ---------- */
+  /* ---------- AVISO DE PRIVACIDAD (permanente) ---------- */
   #privacy-bar{
-    font-size:.78rem;
-    text-align:center;
-    color:var(--on-teal);
-    padding:8px 16px 10px;
-    background:var(--kuf-teal-dark);
-    line-height:1.5;
+    font-size:.78rem;text-align:center;color:var(--ink-soft);
+    padding:4px 16px 8px;line-height:1.5;
   }
   #privacy-bar button{
-    background:none;border:none;color:var(--kuf-gold-soft);
+    background:none;border:none;color:var(--kuf-teal-deep);
     text-decoration:underline;cursor:pointer;font-size:.78rem;padding:10px 8px;min-height:44px;font-family:inherit;font-weight:600;
   }
   #privacy-detail{
-    display:none;
-    font-size:.8rem;
-    line-height:1.5;
-    background:#fff;
-    border-top:3px solid var(--kuf-gold);
-    padding:12px 16px;
-    color:var(--ink);
+    display:none;font-size:.8rem;line-height:1.5;
+    background:#fff;border-top:1px solid var(--turq-line);
+    padding:12px 16px;color:var(--ink);max-height:38vh;overflow-y:auto;
   }
   #privacy-detail.open{display:block;}
 
   ::-webkit-scrollbar{width:8px;}
-  ::-webkit-scrollbar-thumb{background:var(--kuf-teal-deep);border-radius:8px;}
+  ::-webkit-scrollbar-thumb{background:var(--kuf-teal-mid);border-radius:8px;}
 
-  @media (prefers-reduced-motion:reduce){ .chip{transition:none;} }
+  /* ---------- MÓVIL: composición vertical ---------- */
+  @media (max-width:560px){
+    #hero{padding:12px 16px 10px;}
+    .hero-logo{height:60px;}
+    .hero-pill{font-size:.76rem;padding:6px 12px;}
+    .hero-body{
+      grid-template-columns:116px 1fr;
+      grid-template-rows:auto 1fr auto;
+      grid-template-areas:"fig bubble" "fig text" "opts opts";
+      column-gap:12px;row-gap:6px;margin-top:10px;
+    }
+    .hero-fig{align-self:start;}
+    .hero-fig img{width:116px;height:206px;object-fit:cover;object-position:50% 0;-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent);}
+    .hero-bubble-wrap{padding-left:10px;}
+    .hero-bubble{font-size:1rem;padding:10px 14px;border-radius:22px;}
+    .hero-lead{font-size:.9rem;margin-bottom:6px;}
+    .hero-ask{font-size:.95rem;}
+    #hero-options{margin-top:8px;}
+    .is-welcome #quick-replies{max-width:none;}
+  }
+  @media (max-width:560px) and (max-height:700px){
+    .hero-logo{height:44px;}
+    .hero-title{margin-top:4px;font-size:1.6rem;}
+    .hero-rule{display:none;}
+    .hero-body{margin-top:8px;}
+    .hero-fig img{height:150px;width:96px;}
+    .hero-body{grid-template-columns:96px 1fr;}
+    .hero-bubble{font-size:.92rem;padding:8px 12px;}
+    .hero-lead{font-size:.84rem;margin-bottom:4px;}
+    .hero-ask{font-size:.9rem;}
+    #hero-options{margin-top:4px;}
+    .is-welcome #quick-replies{gap:7px;}
+  }
+  @media (prefers-reduced-motion:reduce){ .chip{transition:none;} #chat{animation:none;} }
 </style>
 </head>
 <body>
-<div id="app">
+<div id="app" class="is-welcome">
 
+  <!-- Encabezado de conversación (se muestra al empezar a conversar) -->
   <header>
-    <img class="brand-logo" src="assets/KUF-13.png" alt="Kerygma Universal Films" width="48" height="48">
+    <img class="brand-logo" src="assets/KUF-13.png" alt="Kerygma Universal Films" width="44" height="44">
     <div class="brand-text">
       <h1>Compañero de Camino</h1>
       <p>Asistente educativo del área de Formación de Kerygma Universal Films</p>
     </div>
-    <div class="kuf-tag">Área de<br>Formación</div>
   </header>
 
   <div id="progress-path">
     <div class="path-row" id="path-row"></div>
   </div>
 
-  <div id="chat" role="log" aria-live="polite">
-    <div class="brand-card">
-      <img src="assets/KUF-01.png" alt="Kerygma Universal Films">
-      <span>Un recurso educativo de Kerygma Universal Films</span>
+  <!-- ESTADO 1 — BIENVENIDA: el personaje protagoniza la primera pantalla -->
+  <section id="hero" aria-label="Bienvenida a Compañero de Camino">
+    <div class="hero-top">
+      <img class="hero-logo" src="assets/KUF-01.png" alt="Kerygma Universal Films">
+      <span class="hero-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#b07d12" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 9v6"/></svg>
+        Asistente educativo de Formación
+      </span>
     </div>
-  </div>
+    <h1 class="hero-title">Compañero de Camino</h1>
+    <div class="hero-rule" aria-hidden="true"></div>
+
+    <div class="hero-body">
+      <div class="hero-fig">
+        <img src="assets/companero-cuerpo.png" alt="Compañero de Camino: ilustración de un joven sonriente con sudadera azul y una mochila con una cruz dorada luminosa." width="352" height="957">
+      </div>
+      <div class="hero-bubble-wrap">
+        <p class="hero-bubble">¡Hola, soy tu <em>compañero de camino!</em></p>
+      </div>
+      <div class="hero-text">
+        <p class="hero-lead">Estoy aquí para acompañarte a explorar el área de Formación de Kerygma Universal Films.</p>
+        <p class="hero-ask">¿Qué te gustaría descubrir?</p>
+      </div>
+      <div id="hero-options"></div>
+    </div>
+  </section>
+
+  <!-- ESTADO 2 — CONVERSACIÓN -->
+  <div id="chat" role="log" aria-live="polite"></div>
 
   <div id="quick-replies"></div>
 
@@ -357,7 +377,7 @@
 
   <div id="privacy-bar">
     🔒 Compañero de Camino no solicita información personal.
-    <button id="privacy-toggle">Ver aviso de privacidad</button>
+    <button id="privacy-toggle" aria-expanded="false" aria-controls="privacy-detail">Ver aviso de privacidad</button>
   </div>
   <div id="privacy-detail">
     Este chatbot no pide ni almacena nombres completos, correos, teléfonos, contraseñas ni datos identificables.
@@ -370,7 +390,7 @@
 
 <script>
 /* =========================================================================
-   COMPAÑERO DE CAMINO — motor conversacional (v3)
+   COMPAÑERO DE CAMINO — motor conversacional (v4, versión pública)
    Asistente educativo del ÁREA DE FORMACIÓN de Kerygma Universal Films.
    Rutas: Conocer Kerygma, YO SOY (oferta formativa principal actual), Misión
    Digital (una de las rutas del área) y la próxima oferta formativa
@@ -827,7 +847,7 @@ function addMsg(text, who, opts){
 }
 
 function botSay(text, opts){ addMsg(text, "bot", opts); }
-function userSay(text){ addMsg(escapeHtml(text), "user"); }
+function userSay(text){ exitWelcome(); addMsg(escapeHtml(text), "user"); }
 
 function escapeHtml(str){
   const d = document.createElement("div");
@@ -864,9 +884,13 @@ function renderPath(){
 }
 
 /* ---------- MENÚ PRINCIPAL ---------- */
-function goMenu(){
+/* Para añadir una nueva ruta formativa (OVA, curso, taller, experiencia):
+   1) crear su base de conocimiento (XXX_QA) y su función goXXX(),
+   2) añadir aquí su chip y, si corresponde, su bloque en routeFreeText(). */
+function goMenu(silent){
   state.mode = "menu";
   renderPath();
+  if(silent !== true){ botSay("¿Qué te gustaría descubrir?"); }
   setQuickReplies([
     {label:"Conocer Kerygma", action: goKerygma},
     {label:"Descubrir YO SOY", action: goOVA, gold:true},
@@ -876,18 +900,27 @@ function goMenu(){
   ]);
 }
 
+/* ESTADO 1 — Bienvenida: personaje grande + mensaje + opciones (todo está en #hero).
+   Las respuestas rápidas se alojan en la bienvenida y, al empezar a conversar,
+   regresan a la barra inferior (ESTADO 2). */
+const appEl = document.getElementById("app");
+const heroOptions = document.getElementById("hero-options");
 function welcome(){
-  botSay(
-    "¡Hola, soy tu compañero de camino!<br>Soy <strong>Compañero de Camino</strong>, el asistente educativo del área de Formación de Kerygma Universal Films.\n\n" +
-    "Puedo ayudarte a conocer Kerygma, descubrir YO SOY, explorar Misión Digital y orientarte sobre la próxima oferta formativa, Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital.\n\n" +
-    "¿Por dónde quieres comenzar tu camino?"
-  );
-  goMenu();
-  chatEl.scrollTop = 0;   /* al abrir, mostrar el inicio de la bienvenida (logo y saludo) */
+  appEl.classList.add("is-welcome");
+  heroOptions.appendChild(quickEl);
+  goMenu(true);
+}
+/* ESTADO 2 — Conversación: se compacta la bienvenida; el personaje queda como
+   avatar pequeño junto a los mensajes del asistente. */
+function exitWelcome(){
+  if(!appEl.classList.contains("is-welcome")) return;
+  appEl.classList.remove("is-welcome");
+  appEl.insertBefore(quickEl, document.getElementById("input-row"));
+  chatEl.scrollTop = 0;
 }
 
-/* ---------- Ayuda para responder primero y navegar después (corrección del
-   profesor: nunca sustituir una respuesta directa por una simple redirección) */
+/* ---------- Ayuda para responder primero y navegar después
+   (regla: nunca sustituir una respuesta directa por una simple redirección) */
 function offerLevelNav(chips){
   setQuickReplies(chips);
 }
@@ -1014,11 +1047,13 @@ function answerFromQA(qaList, matchKey, navChips){
 function goKerygma(){
   state.mode = "kerygma";
   renderPath();
-  botSay("Puedes preguntarme, por ejemplo: <em>“¿Qué es Kerygma Universal Films?”</em>, <em>“¿Cuál es su propósito?”</em>, <em>“¿Cuáles son sus cuatro áreas?”</em> o <em>“¿Por qué creó el curso Fundamentos de Misión Digital?”</em>. También puedes escribir tu propia pregunta abajo.");
+  const intro = KERYGMA_QA.find(q => q.kws.includes("que es kerygma"));
+  botSay(intro.a);
+  botSay("Si quieres, podemos explorar esto juntos: su propósito, sus cuatro áreas (Arte, Comunicación, Tecnología y Educación) o cómo se integran. También puedes escribir tu propia pregunta.");
   setQuickReplies([
-    {label:"¿Qué es Kerygma Universal Films?", action:()=>answerKerygmaByKey("que es kerygma")},
     {label:"¿Cuál es su propósito?", action:()=>answerKerygmaByKey("proposito de kerygma")},
     {label:"Sus cuatro áreas", action: goKerygmaAreas},
+    {label:"¿Cómo se integran sus áreas?", action:()=>answerKerygmaByKey("como se integran")},
     {label:"¿Por qué creó el curso?", action:()=>answerKerygmaByKey("por que kerygma ofrece este curso")},
     {label:"⬅ Volver al menú", action: goMenu}
   ]);
@@ -1331,7 +1366,7 @@ function handleM4EditAnswer(text){
 
 /* ---------- LÍMITES DE CONOCIMIENTO ---------- */
 function fallbackLimite(){
-  botSay("Ese tema no está desarrollado directamente en los materiales del área de Formación. Puedo ayudarte a relacionarlo con los conceptos de misión digital que sí estamos trabajando, o puedes explorar el menú principal.");
+  botSay("Ese tema todavía no está desarrollado en mi base de conocimiento. Puedo orientarte sobre Kerygma Universal Films, sus áreas, YO SOY, Misión Digital y las ofertas formativas disponibles.");
   setQuickReplies([
     {label:"Ver menú principal", action: goMenu}
   ]);
@@ -1347,6 +1382,72 @@ function isAskingToDoItForThem(norm){
 }
 
 /* ---------- ENRUTADOR DE MENSAJES LIBRES ---------- */
+/* =========================================================================
+   ALIASES — formas naturales de preguntar
+   Cada alias apunta (ref) a una entrada ya existente de su nivel, identificada
+   por una de sus frases clave; así NO se duplican respuestas. Todas las frases
+   van en minúsculas y sin tildes (como las normaliza normalize()).
+   El ORDEN importa: se aplica el primer alias que coincide, así que van antes
+   los más específicos (YO SOY, Fundamentos, áreas) y al final los generales.
+   Para ampliar: añade un alias, o una nueva entrada en su base de conocimiento.
+   ========================================================================= */
+const LEVELS = {
+  KERYGMA:    { qa: () => KERYGMA_QA,    nav: e => e.nav === "areas" ? NAV_AREAS : NAV_KERYGMA },
+  FORMACION:  { qa: () => FORMACION_QA,  nav: () => NAV_FORMACION },
+  ECOSISTEMA: { qa: () => ECOSISTEMA_QA, nav: () => NAV_ECOSISTEMA },
+  OVA:        { qa: () => OVA_QA,        nav: () => NAV_OVA },
+  INMERSIVA:  { qa: () => INMERSIVA_QA,  nav: () => NAV_INMERSIVA },
+  PROXIMA:    { qa: () => PROXIMA_QA,    nav: () => NAV_PROXIMA }
+};
+function areaAlias(area){
+  return { level:"KERYGMA", ref:"area de " + area, kws:[
+    "que hacen en "+area, "que hacen de "+area, "que tienen de "+area, "que hay en "+area, "que hay de "+area,
+    "que ofrecen en "+area, "hablame de "+area, "cuentame de "+area, "dime de "+area, "sobre "+area
+  ]};
+}
+const ALIAS_ROUTES = [
+  /* YO SOY */
+  { level:"OVA", ref:"que es yo soy", kws:[
+    "quiero conocer yo soy","conocer yo soy","hablame de yo soy","cuentame de yo soy","dime de yo soy","sobre yo soy",
+    "explicame yo soy","informacion de yo soy","informacion sobre yo soy","descubrir yo soy",
+    "cuantos modulos tiene yo soy","cuantos modulos yo soy","modulos de yo soy","modulos yo soy","que modulos tiene yo soy",
+    "yo soy es un diagnostico","yo soy diagnostico","yo soy es un test","yo soy es una prueba","yo soy es terapia"
+  ]},
+  /* Fundamentos de Misión Digital (próxima oferta) */
+  { level:"PROXIMA", ref:"que es fundamentos de mision digital", kws:[
+    "fundamentos de mision digital","hablame de fundamentos","cuentame de fundamentos","curso fundamentos"
+  ]},
+  { level:"FORMACION", ref:"cual es la proxima oferta", kws:[
+    "que curso viene despues","que curso sigue","que curso viene","que viene despues","que sigue despues",
+    "cual es el proximo curso","proximo curso","siguiente curso","que ofreceran","que ofrecen proximamente",
+    "proxima oferta formativa","proxima oferta","que viene luego"
+  ]},
+  /* Experiencia inmersiva */
+  { level:"INMERSIVA", ref:"que es la experiencia inmersiva", kws:[
+    "tienen realidad virtual","hay realidad virtual","realidad virtual","mundo virtual","experiencia virtual",
+    "tienen experiencia inmersiva","hay experiencia inmersiva","experiencia inmersiva","framevr","frame vr"
+  ]},
+  { level:"INMERSIVA", ref:"que es el simulador", kws:["simulador"] },
+  { level:"INMERSIVA", ref:"que es el portal", kws:["portal ova","portal"] },
+  /* Misión Digital (ecosistema) */
+  { level:"ECOSISTEMA", ref:"que es mision digital", kws:[
+    "hablame de mision digital","cuentame de mision digital","dime de mision digital","sobre mision digital",
+    "explicame mision digital","informacion de mision digital","conocer mision digital","descubrir mision digital",
+    "explorar mision digital","que hay en mision digital","que ofrece mision digital"
+  ]},
+  /* Kerygma: áreas primero (específico), después presentación general */
+  areaAlias("arte"), areaAlias("comunicacion"), areaAlias("tecnologia"), areaAlias("educacion"),
+  { level:"KERYGMA", ref:"cuatro areas", kws:[
+    "que areas tienen","que areas tiene","que areas hay","que areas ofrecen","que areas manejan","que areas trabajan",
+    "cuales son sus areas","sus areas","sus cuatro areas"
+  ]},
+  { level:"KERYGMA", ref:"que es kerygma", kws:[
+    "hablame de kerygma","cuentame de kerygma","dime de kerygma","sobre kerygma","explicame kerygma",
+    "quiero conocer kerygma","conocer kerygma","informacion de kerygma","informacion sobre kerygma",
+    "quienes son ustedes","que hacen ustedes","que hace kerygma","que hacen en kerygma","a que se dedican"
+  ]}
+];
+
 function routeFreeText(raw){
   const norm = normalize(raw);
 
@@ -1367,26 +1468,36 @@ function routeFreeText(raw){
 
   /* Coincidencia global por los cinco niveles de conocimiento, para que
      cualquier pregunta escrita libremente reciba SIEMPRE una respuesta
-     directa y breve primero, y solo después botones de navegación —
-     corrección específica a la retroalimentación del profesor: nunca
-     sustituir una respuesta directa por una simple redirección. */
+     directa y breve primero, y solo después botones de navegación;
+     nunca se sustituye una respuesta directa por una simple redirección. */
   const oMatch = OVA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(oMatch){ botSay(oMatch.a); offerLevelNav(NAV_OVA); return; }
 
   const iMatch = INMERSIVA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(iMatch){ botSay(iMatch.a); offerLevelNav(NAV_INMERSIVA); return; }
 
-  const eMatch = ECOSISTEMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
-  if(eMatch){ botSay(eMatch.a); offerLevelNav(NAV_ECOSISTEMA); return; }
-
+  /* Fundamentos (próxima oferta) se evalúa antes que el ecosistema: la frase
+     "qué es Fundamentos de Misión Digital" contiene las palabras de "qué es
+     Misión Digital" y no debe recibir la respuesta del ecosistema. */
   const pMatch = PROXIMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(pMatch){ botSay(pMatch.a); offerLevelNav(NAV_PROXIMA); return; }
+
+  const eMatch = ECOSISTEMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
+  if(eMatch){ botSay(eMatch.a); offerLevelNav(NAV_ECOSISTEMA); return; }
 
   const fMatch = FORMACION_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(fMatch){ botSay(fMatch.a); offerLevelNav(NAV_FORMACION); return; }
 
   const kMatch = KERYGMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(kMatch){ botSay(kMatch.a); offerLevelNav(kMatch.nav === "areas" ? NAV_AREAS : NAV_KERYGMA); return; }
+
+  /* Formas naturales de preguntar (aliases) → respuesta ya existente */
+  const alias = ALIAS_ROUTES.find(a => a.kws.some(k => containsAllWords(norm, k)));
+  if(alias){
+    const lv = LEVELS[alias.level];
+    const entry = lv.qa().find(e => e.kws.includes(alias.ref));
+    if(entry){ botSay(entry.a); offerLevelNav(lv.nav(entry)); return; }
+  }
 
   const cMatch = CONCEPT_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(cMatch){ answerConcept(cMatch); return; }
@@ -1411,8 +1522,9 @@ function handleSend(){
   routeFreeText(val);
 }
 
-document.getElementById("privacy-toggle").addEventListener("click", ()=>{
-  document.getElementById("privacy-detail").classList.toggle("open");
+document.getElementById("privacy-toggle").addEventListener("click", (e)=>{
+  const open = document.getElementById("privacy-detail").classList.toggle("open");
+  e.currentTarget.setAttribute("aria-expanded", open ? "true" : "false");
 });
 
 /* ---------- INICIO ---------- */
