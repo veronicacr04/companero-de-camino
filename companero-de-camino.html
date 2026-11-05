@@ -12,34 +12,46 @@
      navegador usa automáticamente las alternativas locales indicadas en font-family. -->
 <style>
   /* ================================================================
-     PALETA — prioridad visual: Kerygma Universal Films + Formación.
+     PALETA — identidad principal: Kerygma Universal Films (teal y turquesa).
 
-     MARCA INSTITUCIONAL (valores muestreados de los archivos oficiales
-     KUF-13.png y KUF-01.png, no inventados): teal, turquesa, azul claro,
-     dorado y gris del logotipo. Dominan toda la interfaz.
+     MARCA INSTITUCIONAL: valores muestreados de los logotipos oficiales
+     KUF-13.png y KUF-01.png (teal #085c60, turquesa medio #74b8c4, azul
+     claro #cce4e4, dorado #d8a030, gris #84888c). Para dar más presencia a
+     la identidad se derivaron dos turquesas más saturadas (misma tonalidad
+     del turquesa del logo): --turq (#1b9fb5) y --turq-deep (#0d7f93). Son
+     derivaciones de diseño a partir de los logos, no colores oficiales.
+     El dorado queda como acento cálido (CTA y detalles).
 
-     IDENTIDAD COMPLEMENTARIA DIGITAL (azul y violeta): valores muestreados
-     de la ilustración aprobada de Compañero de Camino (sudadera y cielo).
-     Se usan solo como ACENTOS (burbuja del usuario, línea bajo el
-     encabezado, anillo de enfoque), nunca como fondo dominante.
-     Ya no se usan los morados del curso Fundamentos de Misión Digital.
+     IDENTIDAD DIGITAL (acentos, nunca fondo dominante): azul y violeta
+     muestreados de la ilustración aprobada de Compañero de Camino.
+
+     ACCESIBILIDAD (WCAG 2.2 AA): cada par texto/fondo se validó con la
+     fórmula de contraste de WCAG. Texto normal ≥ 4.5:1; texto grande y
+     componentes gráficos ≥ 3:1. Un color del logo NO se usa como texto si
+     no alcanza el contraste: se ajusta el fondo o el color del texto.
      ================================================================ */
   :root{
     /* Kerygma Universal Films (KUF-13.png / KUF-01.png) */
     --kuf-teal-deep:#085c60;
+    --kuf-teal-dark:#063f43;   /* variante más oscura del teal, solo franja inferior */
     --kuf-teal-mid:#74b8c4;
     --kuf-light:#cce4e4;
     --kuf-gold:#d8a030;
     --kuf-gold-soft:#f1d69a;
-    --kuf-gray:#84888c;
+    /* Turquesas saturadas derivadas del logo */
+    --turq:#1b9fb5;
+    --turq-deep:#0d7f93;
+    --turq-surface:#a4dbe5;    /* fondo del área de conversación */
+    --turq-dots:#8fcad7;
     /* Identidad digital complementaria (ilustración aprobada) */
-    --dig-blue:#4b59c9;
+    --dig-blue:#3d4bb8;        /* azul de la ilustración, ajustado para contraste con texto blanco */
     --dig-violet:#522cbd;
-    /* Neutros de interfaz derivados de la marca */
-    --ink:#163336;
-    --ink-soft:#3c5f61;
+    /* Texto y neutros */
+    --ink:#0f2f31;
+    --ink-soft:#2f4f51;
     --surface:#ffffff;
-    --chat-bg:#eaf4f4;
+    --on-teal:#e6f4f4;         /* texto claro sobre teal profundo */
+    --placeholder:#566a6c;
 
     --radius:14px;
     font-size:16px;
@@ -49,7 +61,7 @@
   body{
     margin:0;
     font-family:'Montserrat',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--chat-bg);
+    background:var(--kuf-teal-deep);
     color:var(--ink);
     display:flex;
     justify-content:center;
@@ -60,58 +72,67 @@
     min-height:100vh;
     display:flex;
     flex-direction:column;
-    background:var(--chat-bg);
-    box-shadow:0 0 40px rgba(8,92,96,0.15);
+    background:var(--turq-surface);
+    box-shadow:0 0 40px rgba(6,63,67,0.35);
   }
 
-  /* ---------- HEADER (institucional — Kerygma Universal Films) ---------- */
+  /* Anillo de foco visible sobre fondos claros y oscuros (halo blanco + trazo oscuro) */
+  .chip:focus-visible,#send-btn:focus-visible,#privacy-bar button:focus-visible,#text-input:focus-visible{
+    outline:3px solid var(--ink);
+    outline-offset:2px;
+    box-shadow:0 0 0 2px #fff;
+  }
+
+  /* ---------- HEADER (identidad Kerygma Universal Films) ---------- */
   header{
     position:relative;
-    background:var(--surface);
-    color:var(--kuf-teal-deep);
+    background:var(--kuf-teal-deep);
+    color:#fff;
     padding:12px 18px 14px;
     display:flex;
     align-items:center;
     gap:12px;
+    border-bottom:4px solid var(--kuf-gold);
   }
-  header::after{ /* línea de acento: teal institucional → azul → violeta digital */
-    content:"";position:absolute;left:0;right:0;bottom:0;height:4px;
-    background:linear-gradient(90deg,var(--kuf-teal-deep) 0%,var(--kuf-teal-mid) 40%,var(--dig-blue) 75%,var(--dig-violet) 100%);
+  .brand-logo{
+    width:52px;height:52px;flex:0 0 52px;display:block;
+    background:#fff;border-radius:50%;padding:2px;
   }
-  .brand-logo{width:48px;height:48px;flex:0 0 48px;display:block;}
   .brand-text{min-width:0;}
   .brand-text h1{
     font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif;
-    font-size:1.4rem;
+    font-size:1.45rem;
     font-weight:700;
     margin:0;
     line-height:1.15;
     letter-spacing:.2px;
+    color:#fff;
   }
   .brand-text p{
     margin:2px 0 0;
-    font-size:.76rem;
-    color:var(--ink-soft);
+    font-size:.8rem;
+    color:var(--on-teal);
     font-style:italic;
-    line-height:1.25;
+    line-height:1.3;
   }
   .kuf-tag{
     margin-left:auto;
-    font-size:.68rem;
+    font-size:.72rem;
     text-align:right;
-    color:var(--ink-soft);
+    color:var(--kuf-gold-soft);
     line-height:1.3;
     max-width:110px;
     flex:0 0 auto;
+    font-weight:600;
   }
   @media (max-width:520px){ .kuf-tag{display:none;} }
 
   /* ---------- PROGRESS PATH (Módulo 4) ---------- */
   #progress-path{
     display:none;
-    background:var(--surface);
+    background:var(--turq-deep);
     padding:12px 16px 8px;
-    border-bottom:1px solid var(--kuf-light);
+    border-bottom:3px solid var(--kuf-gold);
   }
   #progress-path.active{display:block;}
   .path-row{display:flex;align-items:flex-start;overflow-x:auto;gap:2px;padding-bottom:4px;}
@@ -122,29 +143,31 @@
     position:relative;
   }
   .path-step .dot{
-    width:20px;height:20px;border-radius:50%;
-    background:var(--surface);
-    border:2px solid var(--kuf-teal-mid);
+    width:24px;height:24px;border-radius:50%;
+    background:#fff;
+    border:2px solid #fff;
     margin:0 auto 4px;
     display:flex;align-items:center;justify-content:center;
-    font-size:.62rem;font-weight:700;color:var(--kuf-teal-deep);
+    font-size:.72rem;font-weight:700;color:var(--kuf-teal-deep);
     position:relative;z-index:1;
   }
   .path-step:not(:last-child)::after{
     content:"";
     position:absolute;
-    top:9px;left:calc(50% + 12px);
-    width:calc(100% - 12px);
-    height:2px;background:var(--kuf-light);
+    top:11px;left:calc(50% + 14px);
+    width:calc(100% - 14px);
+    height:2px;background:rgba(255,255,255,.55);
     z-index:0;
   }
-  .path-step.done .dot{background:var(--kuf-teal-deep);border-color:var(--kuf-teal-deep);color:#fff;}
-  .path-step.done:not(:last-child)::after{background:var(--kuf-teal-deep);}
-  .path-step.current .dot{background:var(--kuf-gold);border-color:var(--kuf-gold);color:var(--ink);}
+  /* El estado no depende solo del color: completado = ✓, actual = anillo dorado + etiqueta en negrita */
+  .path-step.done .dot{background:var(--kuf-teal-deep);color:#fff;}
+  .path-step.done:not(:last-child)::after{background:#fff;}
+  .path-step.current .dot{background:var(--kuf-gold);border-color:#fff;color:var(--ink);box-shadow:0 0 0 3px var(--kuf-gold);}
   .path-step span.label{
-    font-size:.6rem;color:var(--ink-soft);
+    font-size:.72rem;color:#fff;
     display:block;line-height:1.15;
   }
+  .path-step.current span.label{font-weight:700;text-decoration:underline;text-underline-offset:2px;}
 
   /* ---------- CHAT AREA ---------- */
   #chat{
@@ -154,19 +177,22 @@
     display:flex;
     flex-direction:column;
     gap:12px;
-    background:
-      radial-gradient(var(--kuf-light) 1px, transparent 1px);
+    background-color:var(--turq-surface);
+    background-image:radial-gradient(var(--turq-dots) 1.5px, transparent 1.5px);
     background-size:22px 22px;
     background-position:-4px -4px;
   }
   .brand-card{
     align-self:center;
     display:flex;flex-direction:column;align-items:center;gap:4px;
-    padding:2px 0 4px;
+    padding:8px 18px;
     text-align:center;
+    background:#fff;
+    border:2px solid var(--kuf-teal-deep);
+    border-radius:16px;
   }
   .brand-card img{width:132px;max-width:60%;height:auto;display:block;}
-  .brand-card span{font-size:.68rem;color:var(--ink-soft);}
+  .brand-card span{font-size:.75rem;color:var(--ink-soft);}
 
   .row-bot{
     display:flex;align-items:flex-start;gap:8px;
@@ -174,20 +200,20 @@
     max-width:94%;
   }
   .avatar{
-    width:36px;height:36px;flex:0 0 36px;
+    width:38px;height:38px;flex:0 0 38px;
     border-radius:50%;
     object-fit:cover;
-    background:var(--surface);
+    background:#fff;
     border:2px solid var(--kuf-gold);
     margin-top:2px;
   }
-  .msg{max-width:82%;padding:11px 14px;line-height:1.45;font-size:.95rem;}
+  .msg{max-width:82%;padding:11px 14px;line-height:1.5;font-size:.95rem;}
   .msg p{margin:0 0 8px;}
   .msg p:last-child{margin-bottom:0;}
   .msg.bot{
     align-self:flex-start;
-    background:var(--surface);
-    border:1px solid var(--kuf-teal-mid);
+    background:#fff;
+    border:2px solid var(--kuf-teal-deep);
     border-radius:4px 16px 16px 16px;
     color:var(--ink);
   }
@@ -199,99 +225,102 @@
     border-radius:16px 4px 16px 16px;
   }
   .msg.bot.system-note{
-    background:transparent;border:1px dashed var(--kuf-teal-mid);
-    color:var(--ink-soft);font-size:.78rem;align-self:center;max-width:92%;text-align:center;
+    background:transparent;border:1px dashed var(--kuf-teal-deep);
+    color:var(--ink);font-size:.8rem;align-self:center;max-width:92%;text-align:center;
   }
   .msg a{color:inherit;text-decoration:underline;font-weight:600;overflow-wrap:anywhere;}
   .msg.bot a{color:var(--kuf-teal-deep);}
 
-  .checklist{font-size:.85rem;margin-top:6px;padding-left:0;list-style:none;}
+  .checklist{font-size:.88rem;margin-top:6px;padding-left:0;list-style:none;}
   .checklist li{margin-bottom:2px;}
   .checklist li.ok::before{content:"✓ ";color:var(--kuf-teal-deep);font-weight:700;}
-  .checklist li.pending::before{content:"— ";color:var(--kuf-gray);}
+  .checklist li.pending::before{content:"— ";color:var(--ink-soft);}
 
-  /* ---------- QUICK REPLIES ---------- */
+  /* ---------- QUICK REPLIES (zona de navegación en turquesa) ---------- */
   #quick-replies{
     display:flex;
     flex-wrap:wrap;
     gap:8px;
-    padding:6px 14px 12px;
-    background:var(--chat-bg);
+    padding:12px 14px;
+    background:var(--turq-deep);
+    border-top:3px solid var(--kuf-gold);
   }
   .chip{
-    border:1.5px solid var(--kuf-teal-deep);
+    min-height:44px;
+    border:2px solid #fff;
     color:var(--kuf-teal-deep);
-    background:var(--surface);
-    padding:8px 14px;
-    border-radius:20px;
-    font-size:.85rem;
+    background:#fff;
+    padding:8px 16px;
+    border-radius:22px;
+    font-size:.88rem;
+    font-weight:600;
     font-family:inherit;
     cursor:pointer;
     transition:background .15s ease, color .15s ease;
   }
-  .chip:hover,.chip:focus-visible{background:var(--kuf-teal-deep);color:#fff;}
-  .chip.gold{background:var(--kuf-gold);border-color:var(--kuf-gold);color:var(--ink);font-weight:600;}
-  .chip.gold:hover,.chip.gold:focus-visible{background:var(--kuf-teal-deep);border-color:var(--kuf-teal-deep);color:#fff;}
-  .chip:focus-visible,#send-btn:focus-visible,#privacy-bar button:focus-visible{outline:3px solid var(--dig-violet);outline-offset:2px;}
+  .chip:hover{background:var(--kuf-gold);border-color:var(--kuf-gold);color:var(--ink);}
+  .chip.gold{background:var(--kuf-gold);border-color:#fff;color:var(--ink);}
+  .chip.gold:hover{background:var(--kuf-teal-deep);border-color:#fff;color:#fff;}
 
   /* ---------- INPUT ---------- */
   #input-row{
     display:flex;
     gap:8px;
     padding:12px 14px;
-    border-top:2px solid var(--kuf-light);
-    background:var(--surface);
+    background:var(--kuf-teal-deep);
   }
   #text-input{
     flex:1;
     min-width:0;
-    padding:11px 14px;
-    border-radius:22px;
-    border:1.5px solid var(--kuf-teal-mid);
-    background:var(--surface);
+    min-height:44px;
+    padding:11px 16px;
+    border-radius:24px;
+    border:2px solid #fff;
+    background:#fff;
     color:var(--ink);
-    font-size:.95rem;
-    outline:none;
+    font-size:1rem;
     font-family:inherit;
   }
-  #text-input::placeholder{color:var(--kuf-gray);}
-  #text-input:focus{border-color:var(--kuf-teal-deep);box-shadow:0 0 0 3px var(--kuf-light);}
+  #text-input::placeholder{color:var(--placeholder);opacity:1;}
+  #text-input:focus{border-color:var(--kuf-gold);}
   #send-btn{
-    background:var(--kuf-teal-deep);
-    color:#fff;
-    border:none;
+    background:var(--kuf-gold);
+    color:var(--ink);
+    border:2px solid #fff;
     border-radius:50%;
-    width:44px;height:44px;
+    width:46px;height:46px;
     font-size:1.1rem;
     cursor:pointer;
-    flex:0 0 44px;
+    flex:0 0 46px;
   }
-  #send-btn:hover{background:var(--kuf-gold);color:var(--ink);}
+  #send-btn:hover{background:#fff;color:var(--kuf-teal-deep);}
 
   /* ---------- PRIVACY FOOTER ---------- */
   #privacy-bar{
-    font-size:.7rem;
+    font-size:.78rem;
     text-align:center;
-    color:var(--ink-soft);
-    padding:6px 16px 10px;
-    background:var(--surface);
+    color:var(--on-teal);
+    padding:8px 16px 10px;
+    background:var(--kuf-teal-dark);
+    line-height:1.5;
   }
   #privacy-bar button{
-    background:none;border:none;color:var(--kuf-teal-deep);
-    text-decoration:underline;cursor:pointer;font-size:.7rem;padding:0;font-family:inherit;
+    background:none;border:none;color:var(--kuf-gold-soft);
+    text-decoration:underline;cursor:pointer;font-size:.78rem;padding:10px 8px;min-height:44px;font-family:inherit;font-weight:600;
   }
   #privacy-detail{
     display:none;
-    font-size:.72rem;
-    background:var(--kuf-light);
-    border-top:1px solid var(--kuf-teal-mid);
-    padding:10px 16px;
+    font-size:.8rem;
+    line-height:1.5;
+    background:#fff;
+    border-top:3px solid var(--kuf-gold);
+    padding:12px 16px;
     color:var(--ink);
   }
   #privacy-detail.open{display:block;}
 
   ::-webkit-scrollbar{width:8px;}
-  ::-webkit-scrollbar-thumb{background:var(--kuf-teal-mid);border-radius:8px;}
+  ::-webkit-scrollbar-thumb{background:var(--kuf-teal-deep);border-radius:8px;}
 
   @media (prefers-reduced-motion:reduce){ .chip{transition:none;} }
 </style>
@@ -303,9 +332,9 @@
     <img class="brand-logo" src="assets/KUF-13.png" alt="Kerygma Universal Films" width="48" height="48">
     <div class="brand-text">
       <h1>Compañero de Camino</h1>
-      <p>Asistente educativo del ecosistema de Misión Digital</p>
+      <p>Asistente educativo del área de Formación de Kerygma Universal Films</p>
     </div>
-    <div class="kuf-tag">Ecosistema de<br>Misión Digital</div>
+    <div class="kuf-tag">Área de<br>Formación</div>
   </header>
 
   <div id="progress-path">
@@ -342,8 +371,10 @@
 <script>
 /* =========================================================================
    COMPAÑERO DE CAMINO — motor conversacional (v3)
-   Asistente educativo del ECOSISTEMA de Misión Digital de Kerygma Universal
-   Films (ya no exclusivo del curso Fundamentos de Misión Digital).
+   Asistente educativo del ÁREA DE FORMACIÓN de Kerygma Universal Films.
+   Rutas: Conocer Kerygma, YO SOY (oferta formativa principal actual), Misión
+   Digital (una de las rutas del área) y la próxima oferta formativa
+   (Fundamentos de Misión Digital). Misión Digital NO es la identidad global.
 
    Fuentes reales usadas para esta actualización (ninguna cifra, enlace ni
    dato institucional de este bloque fue inventado):
@@ -393,30 +424,67 @@ const KERYGMA_QA = [
   {
     kws: ["como se relaciona el curso","relacion del curso con kerygma","curso y kerygma","propuesta educativa"],
     a: "El curso forma parte del área de Formación de la página educativa de Kerygma. Desde ahí se accede, mediante un enlace, al espacio propio donde se desarrolla todo el recorrido formativo."
+  },
+  /* Las cuatro áreas de Kerygma (texto limitado a lo ya documentado en el
+     storyboard y en la información validada de Kerygma). */
+  {
+    nav:"areas",
+    kws: ["cuatro areas","areas de kerygma","que areas tiene kerygma","cuales son las areas"],
+    a: "Kerygma Universal Films integra cuatro áreas: <strong>Arte, Comunicación, Tecnología y Educación</strong>. No son áreas separadas: se integran en cada proyecto para crear experiencias que inspiren, formen y comuniquen la fe en el continente digital."
+  },
+  {
+    nav:"areas",
+    kws: ["area de arte","arte en kerygma","area arte"],
+    a: "<strong>Arte.</strong> El arte, incluida la producción audiovisual, es una de las formas con que Kerygma da vida a sus proyectos: crea experiencias que inspiran y comunican la fe."
+  },
+  {
+    nav:"areas",
+    kws: ["area de comunicacion","comunicacion en kerygma","area comunicacion"],
+    a: "<strong>Comunicación.</strong> Busca comunicar la fe de manera significativa, creativa, contextualizada y profundamente humana en el entorno digital."
+  },
+  {
+    nav:"areas",
+    kws: ["area de tecnologia","tecnologia en kerygma","area tecnologia"],
+    a: "<strong>Tecnología.</strong> Kerygma la entiende como una herramienta al servicio de las personas, la formación, el encuentro, la comunicación y la misión — nunca como un fin en sí misma."
+  },
+  {
+    nav:"areas",
+    kws: ["area de educacion","educacion en kerygma","area educacion"],
+    a: "<strong>Educación.</strong> Es el área desde la que Kerygma forma y acompaña a personas y comunidades. En la página educativa se vive en el área de Formación, con experiencias como YO SOY y Misión Digital."
   }
 ];
 
-/* ---------- 1bis. ECOSISTEMA DE MISIÓN DIGITAL (Nivel 2) ---------- */
-const ECOSISTEMA_QA = [
+/* ---------- 1bis. ÁREA DE FORMACIÓN y MISIÓN DIGITAL (Nivel 2) ----------
+   Formación es el área; YO SOY (Pantalla 4) y Misión Digital (Pantalla 5) son
+   rutas distintas dentro de ella. El ecosistema de Misión Digital integra:
+   Portal OVA, experiencia inmersiva en FrameVR con simulador HTML, chatbot
+   educativo y próxima oferta formativa (según el storyboard final). */
+const FORMACION_QA = [
   {
-    kws:["que es el ecosistema","que es el ecosistema de mision digital","ecosistema de mision digital","que es mision digital pantalla"],
-    a:"El ecosistema de Misión Digital de Kerygma Universal Films integra varias experiencias que se complementan: el OVA YO SOY (la oferta formativa principal actual), el Portal de Exploración de la Misión Digital con acceso a la experiencia inmersiva en FrameVR y un simulador HTML, este chatbot educativo, y el curso Fundamentos de Misión Digital como próxima oferta formativa."
+    kws:["que ofrece formacion","area de formacion","que es formacion","oferta de formacion","que ofrece el area de formacion","que puedo hacer aqui"],
+    a:"El área de Formación de Kerygma Universal Films presenta sus recursos educativos. Hoy ofrece el OVA interactivo YO SOY como oferta formativa principal, la ruta de Misión Digital (Portal OVA, experiencia inmersiva y simulador) y, como próxima oferta formativa, el curso Fundamentos de Misión Digital."
   },
   {
-    kws:["que incluye el ecosistema","que experiencias incluye","componentes del ecosistema","partes del ecosistema","que integra el ecosistema"],
-    a:"El ecosistema incluye: el Portal de Exploración de la Misión Digital (OVA de acceso), la experiencia inmersiva en FrameVR con su simulador HTML, este chatbot educativo (Compañero de Camino) y el curso Fundamentos de Misión Digital como próxima oferta formativa. El OVA YO SOY es, dentro de este conjunto, la oferta formativa principal disponible actualmente."
-  },
-  {
-    kws:["como se relacionan las experiencias","relacion entre las experiencias","relacion entre las distintas experiencias","como se conectan"],
-    a:"YO SOY es la experiencia principal actual. El Portal de Exploración de la Misión Digital conduce a la experiencia inmersiva en FrameVR y a su simulador, dentro del mismo ecosistema. Este chatbot acompaña el recorrido entre todas ellas. El curso Fundamentos de Misión Digital es la próxima oferta formativa, y conserva su propio acompañamiento (incluido el Módulo 4) para cuando la curses."
-  },
-  {
-    kws:["cual es la experiencia principal actual","cual es la oferta principal","experiencia principal"],
-    a:"La oferta formativa principal disponible actualmente es el OVA interactivo YO SOY · Me conozco. Me cuido. Me integro."
+    kws:["cual es la experiencia principal actual","cual es la oferta principal","experiencia principal","oferta principal actual"],
+    a:"La oferta formativa principal disponible actualmente en el área de Formación es el OVA interactivo YO SOY · Me conozco. Me cuido. Me integro."
   },
   {
     kws:["cual es la proxima oferta","cual es la siguiente oferta"],
-    a:"La próxima oferta formativa del ecosistema es el curso Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital."
+    a:"La próxima oferta formativa es el curso Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital."
+  }
+];
+const ECOSISTEMA_QA = [
+  {
+    kws:["que es mision digital","que es el ecosistema","que es el ecosistema de mision digital","ecosistema de mision digital"],
+    a:"Misión Digital es una de las rutas del área de Formación de Kerygma. Su ecosistema integra el Portal de Exploración (OVA), la experiencia inmersiva en FrameVR con un simulador HTML, este chatbot educativo y, como próxima oferta formativa, el curso Fundamentos de Misión Digital."
+  },
+  {
+    kws:["que incluye el ecosistema","que experiencias incluye","componentes del ecosistema","partes del ecosistema","que integra el ecosistema","que incluye mision digital"],
+    a:"El ecosistema de Misión Digital incluye: el Portal de Exploración de la Misión Digital (OVA de acceso), la experiencia inmersiva en FrameVR con su simulador HTML, este chatbot educativo (Compañero de Camino) y el curso Fundamentos de Misión Digital como próxima oferta formativa."
+  },
+  {
+    kws:["como se relacionan las experiencias","relacion entre las experiencias","relacion entre las distintas experiencias","como se conectan"],
+    a:"Dentro de Misión Digital, el Portal de Exploración conduce a la experiencia inmersiva en FrameVR y a su simulador; este chatbot acompaña el recorrido, y el curso Fundamentos de Misión Digital es la próxima oferta formativa. YO SOY es otra ruta del área de Formación y su oferta principal actual."
   }
 ];
 
@@ -424,7 +492,7 @@ const ECOSISTEMA_QA = [
 const OVA_QA = [
   {
     kws:["que es yo soy","que es el ova yo soy","que es me conozco me cuido me integro","ova interactivo yo soy"],
-    a:"YO SOY · Me conozco. Me cuido. Me integro. es un Objeto Virtual de Aprendizaje (OVA) interactivo y autónomo de autoconocimiento y autocuidado integral. Se organiza en cuatro módulos — mi cuerpo, mi mente, mis emociones y mi espiritualidad — y es de carácter formativo, no diagnóstico. Es la oferta formativa principal disponible actualmente dentro del ecosistema."
+    a:"YO SOY · Me conozco. Me cuido. Me integro. es un Objeto Virtual de Aprendizaje (OVA) interactivo y autónomo de autoconocimiento y autocuidado integral. Se organiza en cuatro módulos — mi cuerpo, mi mente, mis emociones y mi espiritualidad — y es de carácter formativo, no diagnóstico. Es la oferta formativa principal disponible actualmente en el área de Formación."
   },
   {
     kws:["cual es el objetivo de yo soy","objetivo de yo soy","proposito de yo soy","para que sirve yo soy"],
@@ -439,8 +507,8 @@ const OVA_QA = [
     a:"Ofrece una experiencia de una sola pantalla activa, con microescenas de la vida cotidiana, elecciones y retroalimentación inmediata, con posibilidad de profundizar de forma opcional. No hay respuestas correctas ni puntuación que mida el valor de la persona."
   },
   {
-    kws:["como se relaciona yo soy con el ecosistema","relacion de yo soy con el ecosistema"],
-    a:"Dentro del ecosistema de Misión Digital, YO SOY es la oferta formativa principal actual; el resto de las experiencias (Portal de Exploración, FrameVR, simulador y curso) se articulan alrededor de ella."
+    kws:["como se relaciona yo soy con mision digital","como se relaciona yo soy con el ecosistema","relacion de yo soy con el ecosistema","relacion de yo soy con formacion"],
+    a:"YO SOY es la oferta formativa principal actual del área de Formación. Misión Digital es otra ruta de la misma área, con su propio ecosistema (Portal de Exploración, experiencia inmersiva, simulador, chatbot y próxima oferta formativa)."
   }
 ];
 
@@ -464,7 +532,7 @@ const INMERSIVA_QA = [
   },
   {
     kws:["para que sirve la experiencia inmersiva dentro del ecosistema","como funciona como introduccion","como se relaciona con otros componentes"],
-    a:"Funciona como un hook o gancho motivacional: despierta interés y favorece un primer discernimiento, sin sustituir ni al OVA YO SOY ni al curso. Es uno de los componentes del ecosistema, junto con el Portal, el simulador, este chatbot y la próxima oferta formativa."
+    a:"Funciona como un hook o gancho motivacional: despierta interés y favorece un primer discernimiento, sin sustituir al curso. Es uno de los componentes del ecosistema de Misión Digital, junto con el Portal, el simulador, este chatbot y la próxima oferta formativa."
   }
 ];
 
@@ -472,15 +540,15 @@ const INMERSIVA_QA = [
 const PROXIMA_QA = [
   {
     kws:["que es fundamentos de mision digital","de que trata el curso","que es el curso"],
-    a:"Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital es la próxima oferta formativa del ecosistema. Es un curso que acompaña, paso a paso, la construcción de una propuesta real de misión digital, trabajando identidad digital, cultura digital, liderazgo pastoral y discernimiento."
+    a:"Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital es la próxima oferta formativa del área de Formación. Es un curso que acompaña, paso a paso, la construcción de una propuesta real de misión digital, trabajando identidad digital, cultura digital, liderazgo pastoral y discernimiento."
   },
   {
-    kws:["es la oferta principal","es la experiencia principal el curso","sigue siendo la oferta principal"],
-    a:"No: Fundamentos de Misión Digital ya no es la oferta principal actual — esa posición corresponde ahora al OVA YO SOY. El curso se presenta como la próxima oferta formativa del ecosistema."
+    kws:["es la oferta principal el curso","el curso es la oferta principal","fundamentos es la oferta principal","sigue siendo el curso la oferta principal","sigue siendo la oferta principal el curso"],
+    a:"No: Fundamentos de Misión Digital ya no es la oferta principal actual — esa posición corresponde ahora al OVA YO SOY. El curso se presenta como la próxima oferta formativa del área de Formación."
   },
   {
     kws:["cual es la relacion del curso con el ecosistema","como se relaciona el curso con el ecosistema"],
-    a:"El curso es uno de los componentes del ecosistema de Misión Digital, pensado como el siguiente paso formativo después de explorar el OVA YO SOY, el Portal y la experiencia inmersiva."
+    a:"El curso es el próximo componente del ecosistema de Misión Digital: una próxima oferta formativa que se suma al Portal de Exploración, la experiencia inmersiva y el simulador."
   }
 ];
 
@@ -788,7 +856,9 @@ function renderPath(){
   M4_STEPS.forEach((s,i)=>{
     const step = document.createElement("div");
     step.className = "path-step" + (i < state.m4Index ? " done" : "") + (i === state.m4Index ? " current" : "");
-    step.innerHTML = `<div class="dot">${i+1}</div><span class="label">${s.label}</span>`;
+    const done = i < state.m4Index;
+    if(i === state.m4Index){ step.setAttribute("aria-current","step"); }
+    step.innerHTML = `<div class="dot" aria-hidden="true">${done ? "✓" : i+1}</div><span class="label">${s.label}${done ? " (completado)" : (i === state.m4Index ? " (paso actual)" : "")}</span>`;
     pathRow.appendChild(step);
   });
 }
@@ -799,9 +869,8 @@ function goMenu(){
   renderPath();
   setQuickReplies([
     {label:"Conocer Kerygma", action: goKerygma},
-    {label:"Explorar el ecosistema de Misión Digital", action: goEcosistema},
-    {label:"Conocer el OVA Yo Soy", action: goOVA, gold:true},
-    {label:"Descubrir la experiencia inmersiva", action: goInmersiva},
+    {label:"Descubrir YO SOY", action: goOVA, gold:true},
+    {label:"Explorar Misión Digital", action: goEcosistema},
     {label:"Conocer la próxima oferta formativa", action: goProximaOferta},
     {label:"Hacer una pregunta", action: goAskQuestion}
   ]);
@@ -809,11 +878,12 @@ function goMenu(){
 
 function welcome(){
   botSay(
-    "¡Bienvenido/a!<br>Soy <strong>Compañero de Camino</strong>, el asistente educativo del ecosistema de Misión Digital de Kerygma Universal Films.\n\n" +
-    "Puedo ayudarte a conocer a Kerygma, explorar el ecosistema de Misión Digital, conocer el OVA Yo Soy, descubrir la experiencia inmersiva y orientarte sobre la próxima oferta formativa, Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital.\n\n" +
+    "¡Hola, soy tu compañero de camino!<br>Soy <strong>Compañero de Camino</strong>, el asistente educativo del área de Formación de Kerygma Universal Films.\n\n" +
+    "Puedo ayudarte a conocer Kerygma, descubrir YO SOY, explorar Misión Digital y orientarte sobre la próxima oferta formativa, Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital.\n\n" +
     "¿Por dónde quieres comenzar tu camino?"
   );
   goMenu();
+  chatEl.scrollTop = 0;   /* al abrir, mostrar el inicio de la bienvenida (logo y saludo) */
 }
 
 /* ---------- Ayuda para responder primero y navegar después (corrección del
@@ -822,41 +892,57 @@ function offerLevelNav(chips){
   setQuickReplies(chips);
 }
 const NAV_KERYGMA = [
-  {label:"Conocer más sobre Kerygma", action: goKerygma},
-  {label:"Explorar el ecosistema", action: goEcosistema},
+  {label:"Sus cuatro áreas", action: goKerygmaAreas},
+  {label:"Descubrir YO SOY", action: goOVA},
+  {label:"Explorar Misión Digital", action: goEcosistema},
   {label:"⬅ Volver al menú", action: goMenu}
 ];
-const NAV_ECOSISTEMA = [
-  {label:"Conocer el OVA Yo Soy", action: goOVA},
-  {label:"Descubrir la experiencia inmersiva", action: goInmersiva},
+const NAV_AREAS = [
+  {label:"Arte", action:()=>answerKerygmaByKey("area de arte",NAV_AREAS)},
+  {label:"Comunicación", action:()=>answerKerygmaByKey("area de comunicacion",NAV_AREAS)},
+  {label:"Tecnología", action:()=>answerKerygmaByKey("area de tecnologia",NAV_AREAS)},
+  {label:"Educación", action:()=>answerKerygmaByKey("area de educacion",NAV_AREAS)},
+  {label:"⬅ Volver a Kerygma", action: goKerygma},
+  {label:"⬅ Volver al menú", action: goMenu}
+];
+const NAV_FORMACION = [
+  {label:"Descubrir YO SOY", action: goOVA},
+  {label:"Explorar Misión Digital", action: goEcosistema},
   {label:"Conocer la próxima oferta formativa", action: goProximaOferta},
   {label:"⬅ Volver al menú", action: goMenu}
 ];
-const NAV_OVA = [
-  {label:"Explorar el ecosistema", action: goEcosistema},
+const NAV_ECOSISTEMA = [
   {label:"Descubrir la experiencia inmersiva", action: goInmersiva},
+  {label:"Conocer la próxima oferta formativa", action: goProximaOferta},
+  {label:"Descubrir YO SOY", action: goOVA},
+  {label:"⬅ Volver al menú", action: goMenu}
+];
+const NAV_OVA = [
+  {label:"Explorar Misión Digital", action: goEcosistema},
+  {label:"Conocer la próxima oferta formativa", action: goProximaOferta},
   {label:"⬅ Volver al menú", action: goMenu}
 ];
 const NAV_INMERSIVA = [
-  {label:"Explorar el ecosistema", action: goEcosistema},
-  {label:"Conocer el OVA Yo Soy", action: goOVA},
+  {label:"Explorar Misión Digital", action: goEcosistema},
+  {label:"Descubrir YO SOY", action: goOVA},
   {label:"⬅ Volver al menú", action: goMenu}
 ];
 const NAV_PROXIMA = [
   {label:"Explorar los módulos del curso", action: goCourse},
-  {label:"Volver al ecosistema", action: goEcosistema},
+  {label:"Volver a Misión Digital", action: goEcosistema},
   {label:"⬅ Volver al menú", action: goMenu}
 ];
 
-/* ---------- NIVEL 2: ECOSISTEMA DE MISIÓN DIGITAL ---------- */
+/* ---------- RUTA: MISIÓN DIGITAL (ecosistema; una de las rutas de Formación) ---------- */
 function goEcosistema(){
   state.mode = "ecosistema";
   renderPath();
-  botSay("Puedes preguntarme, por ejemplo: <em>“¿Qué es el ecosistema de Misión Digital?”</em> o <em>“¿Cómo se relacionan las experiencias?”</em>. También puedes escribir tu propia pregunta abajo.");
+  botSay("Misión Digital es una de las rutas del área de Formación. Puedes preguntarme, por ejemplo: <em>“¿Qué es Misión Digital?”</em> o <em>“¿Cómo se relacionan las experiencias?”</em>. También puedes escribir tu propia pregunta abajo.");
   setQuickReplies([
-    {label:"¿Qué incluye el ecosistema?", action:()=>answerFromQA(ECOSISTEMA_QA,"que incluye el ecosistema",NAV_ECOSISTEMA)},
-    {label:"¿Cuál es la experiencia principal actual?", action:()=>answerFromQA(ECOSISTEMA_QA,"cual es la experiencia principal actual",NAV_ECOSISTEMA)},
+    {label:"¿Qué es Misión Digital?", action:()=>answerFromQA(ECOSISTEMA_QA,"que es mision digital",NAV_ECOSISTEMA)},
+    {label:"¿Qué incluye?", action:()=>answerFromQA(ECOSISTEMA_QA,"que incluye el ecosistema",NAV_ECOSISTEMA)},
     {label:"¿Cómo se relacionan las experiencias?", action:()=>answerFromQA(ECOSISTEMA_QA,"como se relacionan las experiencias",NAV_ECOSISTEMA)},
+    {label:"Descubrir la experiencia inmersiva", action: goInmersiva},
     {label:"⬅ Volver al menú", action: goMenu}
   ]);
 }
@@ -894,7 +980,7 @@ function goProximaOferta(){
   const m4Label = Object.keys(state.m4Answers).length > 0
     ? "Continuar mi propuesta de misión digital"
     : "Construir mi propuesta de misión digital";
-  botSay("Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital es la próxima oferta formativa del ecosistema. Aquí puedes explorar sus módulos, aclarar conceptos, reflexionar y recibir acompañamiento para diseñar una propuesta de misión digital.");
+  botSay("Fundamentos de Misión Digital: Fe, Liderazgo y Cultura Digital es la próxima oferta formativa del área de Formación. Aquí puedes explorar sus módulos, aclarar conceptos, reflexionar y recibir acompañamiento para diseñar una propuesta de misión digital.");
   setQuickReplies([
     {label:"Explorar los módulos del curso", action: goCourse},
     {label:"Comprender un tema", action: goConcept},
@@ -909,7 +995,7 @@ function goProximaOferta(){
 function goAskQuestion(){
   state.mode = "menu";
   renderPath();
-  botSay("Escribe tu pregunta abajo — por ejemplo sobre Kerygma, el ecosistema, el OVA Yo Soy, la experiencia inmersiva o la próxima oferta formativa. Primero te respondo directamente y después te ofrezco opciones para profundizar o navegar.");
+  botSay("Escribe tu pregunta abajo — por ejemplo sobre Kerygma, YO SOY, Misión Digital o la próxima oferta formativa. Primero te respondo directamente y después te ofrezco opciones para profundizar o navegar.");
   setQuickReplies([
     {label:"⬅ Volver al menú", action: goMenu}
   ]);
@@ -928,28 +1014,33 @@ function answerFromQA(qaList, matchKey, navChips){
 function goKerygma(){
   state.mode = "kerygma";
   renderPath();
-  botSay("Puedes preguntarme, por ejemplo: <em>“¿Qué es Kerygma Universal Films?”</em>, <em>“¿Cuál es su propósito?”</em>, <em>“¿A qué se dedica?”</em> o <em>“¿Por qué creó este curso?”</em>. También puedes escribir tu propia pregunta abajo.");
+  botSay("Puedes preguntarme, por ejemplo: <em>“¿Qué es Kerygma Universal Films?”</em>, <em>“¿Cuál es su propósito?”</em>, <em>“¿Cuáles son sus cuatro áreas?”</em> o <em>“¿Por qué creó el curso Fundamentos de Misión Digital?”</em>. También puedes escribir tu propia pregunta abajo.");
   setQuickReplies([
     {label:"¿Qué es Kerygma Universal Films?", action:()=>answerKerygmaByKey("que es kerygma")},
     {label:"¿Cuál es su propósito?", action:()=>answerKerygmaByKey("proposito de kerygma")},
-    {label:"¿Cómo integra arte, comunicación y tecnología?", action:()=>answerKerygmaByKey("como integra arte")},
-    {label:"¿Por qué creó este curso?", action:()=>answerKerygmaByKey("por que kerygma ofrece este curso")},
+    {label:"Sus cuatro áreas", action: goKerygmaAreas},
+    {label:"¿Por qué creó el curso?", action:()=>answerKerygmaByKey("por que kerygma ofrece este curso")},
     {label:"⬅ Volver al menú", action: goMenu}
   ]);
 }
-function answerKerygmaByKey(matchKey){
+function goKerygmaAreas(){
+  state.mode = "kerygma";
+  renderPath();
+  answerKerygmaByKey("cuatro areas", NAV_AREAS);
+}
+function answerKerygmaByKey(matchKey, navChips){
   const item = KERYGMA_QA.find(q => q.kws.includes(matchKey));
-  if(item){
-    botSay(item.a);
-    botSay("¿Quieres conocer el ecosistema de Misión Digital que surge de esta visión?");
-    setQuickReplies([
-      {label:"Sí, explorar el ecosistema", action: goEcosistema},
-      {label:"Otra pregunta sobre Kerygma", action: goKerygma},
-      {label:"⬅ Volver al menú", action: goMenu}
-    ]);
-  } else {
-    fallbackLimite();
-  }
+  if(!item){ fallbackLimite(); return; }
+  botSay(item.a);
+  if(navChips){ offerLevelNav(navChips); return; }
+  botSay("¿Quieres conocer lo que ofrece el área de Formación?");
+  setQuickReplies([
+    {label:"Descubrir YO SOY", action: goOVA},
+    {label:"Explorar Misión Digital", action: goEcosistema},
+    {label:"Sus cuatro áreas", action: goKerygmaAreas},
+    {label:"Otra pregunta sobre Kerygma", action: goKerygma},
+    {label:"⬅ Volver al menú", action: goMenu}
+  ]);
 }
 
 /* ---------- MÓDULOS DE LA PRÓXIMA OFERTA FORMATIVA (el curso) ---------- */
@@ -1240,7 +1331,7 @@ function handleM4EditAnswer(text){
 
 /* ---------- LÍMITES DE CONOCIMIENTO ---------- */
 function fallbackLimite(){
-  botSay("Ese tema no está desarrollado directamente en los materiales de este curso. Puedo ayudarte a relacionarlo con los conceptos de misión digital que sí estamos trabajando, o puedes explorar el menú principal.");
+  botSay("Ese tema no está desarrollado directamente en los materiales del área de Formación. Puedo ayudarte a relacionarlo con los conceptos de misión digital que sí estamos trabajando, o puedes explorar el menú principal.");
   setQuickReplies([
     {label:"Ver menú principal", action: goMenu}
   ]);
@@ -1279,20 +1370,23 @@ function routeFreeText(raw){
      directa y breve primero, y solo después botones de navegación —
      corrección específica a la retroalimentación del profesor: nunca
      sustituir una respuesta directa por una simple redirección. */
-  const kMatch = KERYGMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
-  if(kMatch){ botSay(kMatch.a); offerLevelNav(NAV_KERYGMA); return; }
-
-  const eMatch = ECOSISTEMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
-  if(eMatch){ botSay(eMatch.a); offerLevelNav(NAV_ECOSISTEMA); return; }
-
   const oMatch = OVA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(oMatch){ botSay(oMatch.a); offerLevelNav(NAV_OVA); return; }
 
   const iMatch = INMERSIVA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(iMatch){ botSay(iMatch.a); offerLevelNav(NAV_INMERSIVA); return; }
 
+  const eMatch = ECOSISTEMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
+  if(eMatch){ botSay(eMatch.a); offerLevelNav(NAV_ECOSISTEMA); return; }
+
   const pMatch = PROXIMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(pMatch){ botSay(pMatch.a); offerLevelNav(NAV_PROXIMA); return; }
+
+  const fMatch = FORMACION_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
+  if(fMatch){ botSay(fMatch.a); offerLevelNav(NAV_FORMACION); return; }
+
+  const kMatch = KERYGMA_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
+  if(kMatch){ botSay(kMatch.a); offerLevelNav(kMatch.nav === "areas" ? NAV_AREAS : NAV_KERYGMA); return; }
 
   const cMatch = CONCEPT_QA.find(item => item.kws.some(k => containsAllWords(norm, k)));
   if(cMatch){ answerConcept(cMatch); return; }
